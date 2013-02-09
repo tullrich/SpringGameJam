@@ -56,14 +56,13 @@
 						}
 					}
 				}
+				else
+					break;
 				moveCost++;
 				
 			}
-		}
-		
-		public function ReturnPath(CameFrom:Tile, CurrentTile:Tile)
-		{
 			
+			return visitedTiles;
 		}
 
 	}
