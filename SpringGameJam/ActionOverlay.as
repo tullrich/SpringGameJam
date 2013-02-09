@@ -4,23 +4,24 @@
 	import SpringGameJam.Unit;
 	
 	public class ActionOverlay extends Sprite {
+	
+		var target:Unit;
 
 		public function ActionOverlay() {
 		}
 		
-		public function ShowOvery(target:Unit);
+	
+		public function HideOverlay():void
+		{
+			
+		}
+		
+		
+		public function ShowOverlay(target:Unit):void
+		{
+			this.target = target;
+		}
 
-	}
-	
-	public function Hide()
-	{
-		
-	}
-	
-	
-	public function Show()
-	{
-		
 	}
 	
 }

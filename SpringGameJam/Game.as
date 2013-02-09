@@ -6,10 +6,13 @@
 	
 	public class Game extends Sprite {
 		
-		static var _level:Grid;
-		static var _targeter:ActionOverlay;
+		static var _instance:Game;
+		var _level:Grid;
+		var _targeter:ActionOverlay;
 
-		public function Game() {
+		public function Game() 
+		{
+			_instance = this;
 			
 			CreateLevel();
 			CreateOverlays();
@@ -27,16 +30,21 @@
 		private function CreateOverlays():void
 		{
 			_targeter = new ActionOverlay();
-			_targeter.hide();
+			_targeter.HideOverlay();
 			addChild(_targeter);
 		}
 		
-		public static function GetGrid():Grid
+		static function GetInstance():Game
+		{
+			return _instance;
+		}
+		
+		public function GetGrid():Grid
 		{
 			return _level;
 		}
 		
-		public static function GetActionOverlay():ActionOverlay
+		public function GetActionOverlay():ActionOverlay
 		{
 			return _targeter;
 		}
