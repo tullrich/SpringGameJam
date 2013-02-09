@@ -9,9 +9,11 @@
 	import SpringGameJam.*;
 
 	
-	public class Tile extends Sprite {
+	public class Tile extends Sprite 
+	{
 		
 		public var terrain:Terrain;
+		public var bIsActive:Boolean
 
 		public function Tile(x:int, y:int)
 		{
@@ -42,6 +44,16 @@
 					Game.GetActionOverlay().Show(residentUnit);
 				}
             }
+		}
+		
+		public function SetActive(b:Boolean)
+		{
+			bIsActive = b;
+		}
+		
+		public function Boolean GetActive()
+		{
+			return bIsActive;
 		}
 	
 

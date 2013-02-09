@@ -5,10 +5,11 @@
 	
 	public class ActionOverlay extends Sprite {
 
-		public function ActionOverlay() {
+		public function ActionOverlay() 
+		{
+			
 		}
 		
-		public function ShowOvery(target:Unit);
 
 	}
 	
@@ -22,5 +23,7 @@
 	{
 		
 	}
+	
+	public function 
 	
 }
