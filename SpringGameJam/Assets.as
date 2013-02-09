@@ -9,8 +9,15 @@
 		
 		[Embed(source="/assets/TestSpriteSheet.xml",mimeType="application/octet-stream")]
 		private static const TestAnimXML:Class;
+		
 		[Embed(source="/assets/TestSpriteSheet.png")]
-		private static const TestAnimAtlas:Class;	
+		private static const TestAnimAtlas:Class;
+		
+		[Embed(source="/assets/tile.png")]
+		private static const TileBorder:Class;
+		
+		[Embed(source="/assets/tile_inner.png")]
+		private static const TileInner:Class;
 		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
@@ -22,7 +29,6 @@
 		
 		public static function getTexture(name:String):Texture
 		{	
-			trace("getTexture " + name);
 			if (_textureAssets[name] == undefined) {
 				var bitmap:Bitmap = Bitmap(new Assets[name]());
 				_textureAssets[name] = Texture.fromBitmap(bitmap);

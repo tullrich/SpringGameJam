@@ -1,7 +1,11 @@
 ﻿package SpringGameJam {
 	
 	import starling.display.Sprite;
-	import flash.events.MouseEvent;
+	import starling.display.Image;
+	import starling.events.Event;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	import SpringGameJam.*;
 
 	
@@ -9,19 +13,30 @@
 		
 		public var terrain:Terrain;
 
-		public function Tile(x:int, y:int) {
-/*			graphics.beginFill(Math.floor(Math.random() * 0xFFFFFF));
-			graphics.drawRect(0, 0, 64, 64); 
-			graphics.endFill();*/
+		public function Tile(x:int, y:int)
+		{
+			super();
+			
 			this.x = x;
 			this.y = y;
-        	this.addEventListener(MouseEvent.CLICK, OnClick);
-			terrain = new Terrain();
-			addChild(terrain);
+			
+			addEventListener(Event.ADDED_TO_STAGE, init);
+        	addEventListener(TouchEvent.TOUCH, OnClick);
 		}
 		
-		public function OnClick(e:MouseEvent) {
-			trace("clicked on " + this);
+		public function init(e:Event):void
+		{
+			
+			var _mc:Image = new Image(Assets.getTexture("TileBorder"));
+			addChildAt(_mc, 0);
+		}
+		
+		public function OnClick(e:TouchEvent) {
+			var touch:Touch = e.getTouch(this);  
+            if (touch && touch.phase == TouchPhase.ENDED) {  
+				var _mc:Image = new Image(Assets.getTexture("TileInner"));
+				addChildAt(_mc, 0);
+            }
 		}
 
 	}

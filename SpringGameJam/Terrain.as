@@ -9,8 +9,6 @@
 	
 	public class Terrain extends Sprite {
 		
-
-		
 		public function Terrain() 
 		{
 			super();	
