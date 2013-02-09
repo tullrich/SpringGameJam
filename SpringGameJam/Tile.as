@@ -38,11 +38,23 @@
 				var _mc:Image = new Image(Assets.getTexture("TileInner"));
 				addChildAt(_mc, 0);
 				
-				if(resident != undefined)
+					Game.GetInstance().ToggleCinematic(true);
+				if(resident != null)
 				{
 					Game.GetInstance()._targeter.ShowOverlay(resident);
 				}
             }
+		}
+		
+		public function HasRoom():Boolean
+		{
+			return resident == null;
+		}
+		
+		public function SetResident(u:Unit)
+		{
+			resident = u;
+			u.tile = this;
 		}
 	
 

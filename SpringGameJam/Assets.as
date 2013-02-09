@@ -19,6 +19,9 @@
 		[Embed(source="/assets/tile_inner.png")]
 		private static const TileInner:Class;
 		
+		[Embed(source="/assets/interceptor.png")]
+		private static const Interceptor:Class;
+		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
 		private static var _atlasAssets:Dictionary = new Dictionary();
