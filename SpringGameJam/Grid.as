@@ -20,8 +20,8 @@
 		{
 			if( Map[x][y] != null && Map[x][y].HasRoom())
 			{
-				Map[x][y].SetResident(u);
 				addChild(u);
+				u.Place(Map[x][y])
 			}
 		}
 		

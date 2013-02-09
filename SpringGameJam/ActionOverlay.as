@@ -2,6 +2,7 @@
 	
 	import starling.display.Sprite;
 	import SpringGameJam.Unit;
+	import SpringGameJam.Tile;
 	
 	public class ActionOverlay extends Sprite {
 	
@@ -23,14 +24,16 @@
 			var moveDistance = target.GetMove();
 		}
 		
-		public function Vector FindPath(startPosition:Tile,endPosition:Tile)
+		public function FindPath(startPosition:Tile,endPosition:Tile):Vector
 		{
-			var closedSet:Vector.<Tile> = new Vector.<Tile>();
+/*			var closedSet:Vector.<Tile> = new Vector.<Tile>();
 			var openSet:Vector.<Tile> = new Vector.<Tile>();
 				openSet.push(startPosition);
 			var visitedTiles:Vector.<Tile> = new Vector.<Tile>();
 
-			while(openSet.length > 0)
+			while(openSet.length > 0)*/
+			
+			return null;
 		}
 
 	}

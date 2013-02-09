@@ -40,10 +40,11 @@
 				var _mc:Image = new Image(Assets.getTexture("TileInner"));
 				addChildAt(_mc, 0);
 				
-					Game.GetInstance().ToggleCinematic(true);
 				if(resident != null)
 				{
-					Game.GetInstance()._targeter.ShowOverlay(resident);
+					Game.GetInstance().ToggleCinematic(true);
+					resident.MoveTo(Game.GetInstance()._level.Map[2][1]);
+					//Game.GetInstance()._targeter.ShowOverlay(resident);
 				}
             }
 		}
@@ -56,7 +57,16 @@
 		public function SetResident(u:Unit)
 		{
 			resident = u;
-			u.tile = this;
+			resident.tile = this;
+		}
+		
+		public function RemoveResident()
+		{
+			if(resident != null)
+			{
+				resident.tile = null;
+				resident = null;
+			}
 		}
 	
 		public function SetActive(b:Boolean)
@@ -64,7 +74,7 @@
 			bIsActive = b;
 		}
 		
-		public function Boolean GetActive()
+		public function GetActive():Boolean
 		{
 			return bIsActive;
 		}
