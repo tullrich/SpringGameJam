@@ -36,8 +36,14 @@
             if (touch && touch.phase == TouchPhase.ENDED) {  
 				var _mc:Image = new Image(Assets.getTexture("TileInner"));
 				addChildAt(_mc, 0);
+				
+				if(residentUnit != undefined)
+				{
+					Game.GetActionOverlay().Show(residentUnit);
+				}
             }
 		}
+	
 
 	}
 	

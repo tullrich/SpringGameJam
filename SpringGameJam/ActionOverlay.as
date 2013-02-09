@@ -12,4 +12,15 @@
 
 	}
 	
+	public function Hide()
+	{
+		
+	}
+	
+	
+	public function Show()
+	{
+		
+	}
+	
 }
