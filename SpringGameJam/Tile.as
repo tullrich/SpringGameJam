@@ -64,7 +64,7 @@
 			bIsActive = b;
 		}
 		
-		public function Boolean GetActive()
+		public function GetActive():Boolean
 		{
 			return bIsActive;
 		}

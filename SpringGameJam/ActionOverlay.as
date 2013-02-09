@@ -6,8 +6,11 @@
 	public class ActionOverlay extends Sprite {
 	
 		var target:Unit;
+		var currentLevel:Grid;
 
-		public function ActionOverlay() {
+		public function ActionOverlay() 
+		{
+			currentLevel = Game.GetInstance()._Level
 		}
 		
 	
@@ -17,20 +20,50 @@
 		}
 		
 		
-		public function ShowOverlay(target:Unit):void
+		public function ShowOverlay(target:Unit):Dictionary
 		{
 			this.target = target;
+			var currentTile:Tile;
 			var moveDistance = target.GetMove();
-		}
-		
-		public function Vector FindPath(startPosition:Tile,endPosition:Tile)
-		{
+			var moveCost:int = 0;
 			var closedSet:Vector.<Tile> = new Vector.<Tile>();
 			var openSet:Vector.<Tile> = new Vector.<Tile>();
-				openSet.push(startPosition);
-			var visitedTiles:Vector.<Tile> = new Vector.<Tile>();
+				openSet.push(target.getTile());
+			var visitedTiles:Dictionary = new Dictionary();
+			var neighboringTiles:Vector.<Tile> = new Vector.<Tile>();
+			var aNeighbor:Tile;
 
-			while(openSet.length > 0)
+			while(openSet[0] != Null)
+			{
+				if(moveDistance <= moveCost)
+				{
+					currentTile = openSet.shift();
+					closedSet.push(currentTile);
+					neighboringTiles = currentLevel.GetAdjacentTiles(currentTiles);
+					while(neighboringTiles[0] != null)
+					{
+						aNeighbor = neighboringTiles.shift();
+						if(openSet.indexOf(aNeighbor,0) == -1)
+						{
+							if(closedSet.indexOf(aNeighbor,0) == -1)
+							{
+								if(aNeighbor.GetActive())
+								{
+									openSet.push(aNeighbor);
+									visitedTiles[aNeighbor] = currentTile;
+								}
+							}
+						}
+					}
+				}
+				moveCost++;
+				
+			}
+		}
+		
+		public function ReturnPath(CameFrom:Tile, CurrentTile:Tile)
+		{
+			
 		}
 
 	}

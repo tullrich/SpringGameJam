@@ -16,7 +16,7 @@
 			moveDistance = m;
 		}
 		
-		public function int GetMove()
+		public function GetMove():int
 		{
 			return moveDistance;
 		}
