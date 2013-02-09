@@ -20,6 +20,17 @@
 		public function ShowOverlay(target:Unit):void
 		{
 			this.target = target;
+			var moveDistance = target.GetMove();
+		}
+		
+		public function Vector FindPath(startPosition:Tile,endPosition:Tile)
+		{
+			var closedSet:Vector.<Tile> = new Vector.<Tile>();
+			var openSet:Vector.<Tile> = new Vector.<Tile>();
+				openSet.push(startPosition);
+			var visitedTiles:Vector.<Tile> = new Vector.<Tile>();
+
+			while(openSet.length > 0)
 		}
 
 	}
