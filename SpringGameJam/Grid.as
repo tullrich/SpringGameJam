@@ -10,6 +10,7 @@
 		
 		var xTiles:uint, yTiles:uint;
 		var Map:Dictionary = new Dictionary();
+		var _targeter:ActionOverlay;
 
 		public function Grid(x:uint, y:uint) {
 			xTiles = x;
@@ -39,17 +40,28 @@
 				var innerArray:Dictionary = new Dictionary();
 				for(var j:int = 0; j < dim_y; j++)
 				{
-					innerArray[j] = CreateShapeAt(i * 64, j * 64);
+					innerArray[j] = CreateShapeAt(i, j);
 				}
 				
 				Map[i] = innerArray;
 			}
 			
+			CreateOverlays();
+			
+		}
+		
+		private function CreateOverlays():void
+		{
+			_targeter = new ActionOverlay();
+			_targeter.HideOverlay();
+			addChild(_targeter);
 		}
 		
 		private function CreateShapeAt(x:int, y:int):Tile
 		{
 			var newtile:Tile = new Tile(x, y);
+			newtile.x = x * 64;
+			newtile.y = y * 64;
 			addChild(newtile); 
 			
 			return newtile;
@@ -57,8 +69,42 @@
 		
 		public function GetAdjacentTiles(tile:Tile):Vector.<Tile>
 		{
-			return null;
+			var adjacent:Vector.<Tile> = new Vector.<Tile>();
+			
+			// right side 
+			if (tile.xindex + 1 < xTiles)
+			{
+				adjacent.push(Map[tile.xindex + 1][tile.yindex]);
+			}
+			
+			// left side
+			if (tile.xindex - 1 > 0)
+			{
+				adjacent.push(Map[tile.xindex - 1][tile.yindex]);
+			}
+						
+			// bottom side 
+			if (tile.yindex + 1 < yTiles)
+			{
+				adjacent.push(Map[tile.xindex][tile.yindex + 1]);
+			}
+			
+			// top side
+			if (tile.yindex - 1 > 0)
+			{
+				adjacent.push(Map[tile.xindex][tile.yindex - 1]);
+			}
+			
+			trace(tile + " adjacent to " + adjacent);
+			
+			return adjacent;
 		}
+		
+		public function GetActionOverlay():ActionOverlay
+		{
+			return _targeter;
+		}
+		
 
 	}
 	

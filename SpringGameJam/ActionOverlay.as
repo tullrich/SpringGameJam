@@ -2,15 +2,19 @@
 	
 	import starling.display.Sprite;
 	import SpringGameJam.Unit;
+    import flash.utils.Dictionary;
+	import starling.display.Image;
 	
 	public class ActionOverlay extends Sprite {
 	
 		var target:Unit;
+		var came_from:Dictionary = new Dictionary();
+		var reachable:Vector.<Tile> = new Vector.<Tile>();
 		var currentLevel:Grid;
 
 		public function ActionOverlay() 
 		{
-			currentLevel = Game.GetInstance()._Level
+			currentLevel = Game.GetInstance()._level
 		}
 		
 	
@@ -20,45 +24,75 @@
 		}
 		
 		
-		public function ShowOverlay(target:Unit):Dictionary
+		public function ShowOverlay(target:Unit):void
 		{
 			this.target = target;
+			came_from =  new  Dictionary();
+			
+			ComputePaths();
+			CreateOverlayTiles();
+		}
+		
+		private function CreateOverlayTiles()
+		{
+			for each (var key:Tile in reachable)
+			{
+				var _mc:Image = new Image(Assets.getTexture("OverlayMove"));
+				_mc.x = key.x;
+				_mc.y = key.y;
+				addChildAt(_mc, 0);
+			}
+				 
+		}
+		
+		private function ComputePaths():void
+		{
 			var currentTile:Tile;
-			var moveDistance = target.GetMove();
-			var moveCost:int = 0;
+			var unitMove = target.GetMove();
+			var depth:int = 0;
 			var closedSet:Vector.<Tile> = new Vector.<Tile>();
 			var openSet:Vector.<Tile> = new Vector.<Tile>();
-				openSet.push(target.getTile());
-			var visitedTiles:Dictionary = new Dictionary();
+			openSet.push(target.tile);
 			var neighboringTiles:Vector.<Tile> = new Vector.<Tile>();
-			var aNeighbor:Tile;
 
-			while(openSet[0] != Null)
+			while(openSet.length > 0)
 			{
-				if(moveDistance <= moveCost)
+				if(unitMove < depth)
 				{
-					currentTile = openSet.shift();
-					closedSet.push(currentTile);
-					neighboringTiles = currentLevel.GetAdjacentTiles(currentTiles);
-					while(neighboringTiles[0] != null)
+					break;
+				}
+				
+				var tempOpen:Vector.<Tile> = new Vector.<Tile>()
+				for each (var curTile:Tile in openSet)
+				{
+					closedSet.push(curTile);
+					neighboringTiles = currentLevel.GetAdjacentTiles(curTile);
+					
+					for each (var neighbor:Tile in neighboringTiles)
 					{
-						aNeighbor = neighboringTiles.shift();
-						if(openSet.indexOf(aNeighbor,0) == -1)
+						if(openSet.indexOf(neighbor,0) == -1)
 						{
-							if(closedSet.indexOf(aNeighbor,0) == -1)
+							if(closedSet.indexOf(neighbor,0) == -1)
 							{
-								if(aNeighbor.GetActive())
+								if(tempOpen.indexOf(neighbor,0) == -1)
 								{
-									openSet.push(aNeighbor);
-									visitedTiles[aNeighbor] = currentTile;
+									if(neighbor.GetActive())
+									{
+										tempOpen.push(neighbor);
+										came_from[neighbor] = curTile;
+									}
 								}
 							}
 						}
 					}
-				}
-				moveCost++;
 				
+				}
+				
+				openSet = tempOpen;
+				depth++;
 			}
+			
+			reachable = closedSet;
 		}
 		
 		public function ReturnPath(CameFrom:Tile, CurrentTile:Tile)

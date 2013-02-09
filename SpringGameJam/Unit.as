@@ -14,6 +14,7 @@
 		
 		public function Unit() 
 		{
+			moveDistance = 2;
 			this.touchable = false;
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}

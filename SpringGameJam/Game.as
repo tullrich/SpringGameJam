@@ -13,7 +13,6 @@
 		
 		static var _instance:Game;
 		var _level:Grid;
-		var _targeter:ActionOverlay;
 		var _interceptor:Sprite;
 		var bIntercepting;
 		
@@ -25,7 +24,6 @@
 			bIntercepting = false;
 			
 			CreateLevel();
-			CreateOverlays();
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
@@ -33,7 +31,7 @@
 		private function init():void
 		{
 			_level.init();
-			CreateUnitAt(Unit, 5, 4);
+			CreateUnitAt(Unit, 0, 0);
 		}
 		
 		public function CreateUnitAt(unitClass:Class, x:uint, y:uint):void
@@ -49,13 +47,6 @@
 			_level.x = 300;
 			_level.y = 100;
 			addChild(_level);
-		}
-		
-		private function CreateOverlays():void
-		{
-			_targeter = new ActionOverlay();
-			_targeter.HideOverlay();
-			addChild(_targeter);
 			
 			_interceptor = new Sprite();
 			_interceptor.height = height;
@@ -82,12 +73,6 @@
 		{
 			return _level;
 		}
-		
-		public function GetActionOverlay():ActionOverlay
-		{
-			return _targeter;
-		}
-		
 		public function ToggleCinematic(toggle:Boolean):void
 		{
 			if(toggle && !bIntercepting)

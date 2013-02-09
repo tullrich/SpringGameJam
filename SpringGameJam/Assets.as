@@ -29,6 +29,9 @@
 		[Embed(source="/assets/interceptor.png")]
 		private static const Interceptor:Class;
 		
+		[Embed(source="/assets/overlay_move.png")]
+		private static const OverlayMove:Class;
+		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
 		private static var _atlasAssets:Dictionary = new Dictionary();
