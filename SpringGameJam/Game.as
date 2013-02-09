@@ -5,17 +5,26 @@
 	
 	public class Game extends Sprite {
 		
-		var level1:Grid;
+		static var _level:Grid;
 
 		public function Game() {
-			level1 = new Grid(10, 10);
 			
-			level1.x = 300;
-			level1.y = 100;
-			addChild(level1);
+			CreateLevel();
 		}
 		
-
+		private function CreateLevel():void
+		{
+			_level = new Grid(10, 10);
+			
+			_level.x = 300;
+			_level.y = 100;
+			addChild(_level);
+		}
+		
+		public static function GetGrid():Grid
+		{
+			return _level;
+		}
 	}
 	
 }
