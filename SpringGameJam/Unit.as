@@ -1,8 +1,8 @@
 ﻿package SpringGameJam {
 	
-	import starling.display.MovieClip;
+	import starling.display.Sprite;
 	
-	public class Unit extends MovieClip {
+	public class Unit extends Sprite {
 
 		public function Unit() {
 			// constructor code

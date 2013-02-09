@@ -9,11 +9,10 @@
 	import SpringGameJam.*;
 
 	
-	public class Tile extends Sprite 
-	{
+	public class Tile extends Sprite {
 		
 		public var terrain:Terrain;
-		public var bIsActive:Boolean
+		public var resident:Unit;
 
 		public function Tile(x:int, y:int)
 		{
@@ -39,21 +38,11 @@
 				var _mc:Image = new Image(Assets.getTexture("TileInner"));
 				addChildAt(_mc, 0);
 				
-				if(residentUnit != undefined)
+				if(resident != undefined)
 				{
-					Game.GetActionOverlay().Show(residentUnit);
+					Game.GetInstance()._targeter.ShowOverlay(resident);
 				}
             }
-		}
-		
-		public function SetActive(b:Boolean)
-		{
-			bIsActive = b;
-		}
-		
-		public function Boolean GetActive()
-		{
-			return bIsActive;
 		}
 	
 
