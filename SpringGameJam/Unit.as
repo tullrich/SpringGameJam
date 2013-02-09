@@ -2,12 +2,23 @@
 	
 	import starling.display.Sprite;
 	
-	public class Unit extends Sprite {
+	public class Unit extends Sprite 
+	{
+		var moveDistance:int;
 		
-		public var tile:Tile;
-
-		public function Unit() {
+		public function Unit() 
+		{
 			// constructor code
+		}
+		
+		public function SetMove(m:int)
+		{
+			moveDistance = m;
+		}
+		
+		public function int GetMove()
+		{
+			return moveDistance;
 		}
 
 	}

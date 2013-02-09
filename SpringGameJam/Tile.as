@@ -9,10 +9,12 @@
 	import SpringGameJam.*;
 
 	
-	public class Tile extends Sprite {
+	public class Tile extends Sprite 
+	{
 		
 		public var terrain:Terrain;
 		public var resident:Unit;
+		public var bIsActive:Boolean;
 
 		public function Tile(x:int, y:int)
 		{
@@ -57,6 +59,15 @@
 			u.tile = this;
 		}
 	
+		public function SetActive(b:Boolean)
+		{
+			bIsActive = b;
+		}
+		
+		public function Boolean GetActive()
+		{
+			return bIsActive;
+		}
 
 	}
 	
