@@ -1,9 +1,9 @@
 ﻿package SpringGameJam {
 	
 	import starling.display.Sprite;
-	import SpringGameJam.Grid;
+	import SpringGameJam.Robot;
+	import SpringGameJam.Level1;
 	import starling.display.Image;
-	import SpringGameJam.ActionOverlay;
 	import starling.events.Touch;
 	import starling.events.Event;
 	import starling.events.TouchEvent;
@@ -31,8 +31,8 @@
 		private function init():void
 		{
 			_level.init();
-			CreateUnitAt(Actor, 1, 3);
-			CreateUnitAt(Actor, 1, 2);
+			CreateUnitAt(Robot, 1, 3);
+			CreateUnitAt(Fireman, 1, 2);
 		}
 		
 		public function CreateUnitAt(unitClass:Class, x:uint, y:uint):void
@@ -43,10 +43,15 @@
 		
 		private function CreateLevel():void
 		{
-			_level = new Grid(10, 10);
 			
-			_level.x = 300;
-			_level.y = 100;
+			var _mc:Image = new Image(Assets.getTexture("BgWater"));
+			addChild(_mc);
+			
+			
+			_mc = new Image(Assets.getTexture("BgAirplane"));
+			addChild(_mc);
+			
+			_level = new Grid(42, 33, Level1.Info);
 			addChild(_level);
 			
 			_interceptor = new Sprite();

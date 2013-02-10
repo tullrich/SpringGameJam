@@ -13,12 +13,17 @@
 		[Embed(source="/assets/TestSpriteSheet.png")]
 		private static const TestAnimAtlas:Class;
 		
-		
 		[Embed(source="/assets/RobotIdle.xml",mimeType="application/octet-stream")]
 		private static const RobotIdleXML:Class;
 		
 		[Embed(source="/assets/RobotIdle.png")]
 		private static const RobotIdleAtlas:Class;
+		
+		[Embed(source="/assets/MechanicWalk.xml",mimeType="application/octet-stream")]
+		private static const MechanicWalkXML:Class;
+		
+		[Embed(source="/assets/MechanicWalk.png")]
+		private static const MechanicWalkAtlas:Class;
 		
 		[Embed(source="/assets/tile.png")]
 		private static const TileBorder:Class;
@@ -34,6 +39,12 @@
 		
 		[Embed(source="/assets/overlay_interact.png")]
 		private static const OverlayInteract:Class;
+		
+		[Embed(source="/assets/Airplane.png")]
+		private static const BgAirplane:Class;
+		
+		[Embed(source="/assets/WaterBackground.png")]
+		private static const BgWater:Class;
 		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();

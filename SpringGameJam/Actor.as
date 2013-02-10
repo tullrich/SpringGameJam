@@ -81,7 +81,7 @@
 			if(tweenPath.length > 0)
 			{
 				var nextTile:Tile = tweenPath.shift();
-				var tween:Tween = new Tween(this, .5, Transitions.LINEAR);
+				var tween:Tween = new Tween(this, .1, Transitions.LINEAR);
 				tween.animate("x", nextTile.x);
 				tween.animate("y", nextTile.y);
 				tween.onComplete = TickPath;

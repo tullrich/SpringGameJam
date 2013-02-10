@@ -37,6 +37,8 @@
 		{
 			
 			var _mc:Image = new Image(Assets.getTexture("TileBorder"));
+			_mc.scaleX = 0.375;
+			_mc.scaleY = 0.375;
 			addChildAt(_mc, 0);
 		}
 		

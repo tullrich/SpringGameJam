@@ -48,6 +48,8 @@
 			{
 				var _mc:Image = new Image(Assets.getTexture("OverlayMove"));
 				_mc.touchable = false;
+				_mc.scaleX = 0.375;
+				_mc.scaleY = 0.375;
 				_mc.x = akey.x;
 				_mc.y = akey.y;
 				addChildAt(_mc, 0);
@@ -57,6 +59,8 @@
 			{
 				var _mc2:Image = new Image(Assets.getTexture("OverlayInteract"));
 				_mc2.touchable = false;
+				_mc2.scaleX = 0.375;
+				_mc2.scaleY = 0.375;
 				_mc2.x = bkey.x;
 				_mc2.y = bkey.y;
 				addChildAt(_mc2, 0);

@@ -28,8 +28,10 @@
 		public function init(e:Event):void
 		{		
 			model = new MovieClip(Assets.getTexturesFromAtlas(IdleAnimation), 4);
-			model.pivotX = model.x = model.height / 2;
-			model.pivotY = model.y = model.width / 2;
+			scaleX = 0.375;
+			scaleY = 0.375;
+			model.pivotX = model.x = (model.height) / 2;
+			model.pivotY = model.y = (model.width) / 2;
 			model.rotation = Math.PI + Math.PI / 2;
 			addChild(model);
 			Starling.juggler.add(model);
