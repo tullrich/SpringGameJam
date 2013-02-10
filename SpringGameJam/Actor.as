@@ -73,7 +73,7 @@
 			if(awaitingInteract != null)
 			{
 				LookTowards(awaitingInteract);
-				Interact(awaitingInteract);
+				Interact(awaitingInteract.resident);
 			}
 			else
 			{
@@ -96,12 +96,12 @@
 			bHasAttacked = false;
 		}
 		
-		public function Interact(interact:Tile):void
+		public function Interact(unit:Unit):void
 		{
 			
 		}
 		
-		public function CanInteract(interact:Tile):Boolean
+		public function CanInteract(unit:Unit):Boolean
 		{
 			return false;
 		}

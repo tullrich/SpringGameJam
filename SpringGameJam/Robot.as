@@ -13,12 +13,12 @@
 			movementAnimation = "";
 		}
 		
-		override public function Interact(interact:Tile):void
+		override public function Interact(unit:Unit):void
 		{
 			
 		}
 		
-		override public function CanInteract(interact:Tile):Boolean
+		override public function CanInteract(unit:Unit):Boolean
 		{
 			return false;
 		}

@@ -106,7 +106,7 @@
 										came_from[neighbor] = curTile;
 									}
 								}
-								else if (target.CanInteract(neighbor))
+								else if (target.CanInteract(neighbor.resident))
 								{
 									if(interactable.indexOf(neighbor,0) == -1)
 									{

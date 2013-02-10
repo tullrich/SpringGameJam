@@ -12,15 +12,13 @@
 			movementAnimation = "";
 		}
 		
-		override public function Interact(interact:Tile):void
+		override public function Interact(unit:Unit):void
 		{
-			if (tile.IsOpen())
+			if (unit == null)
 			{
-				trace("Error: Interacting with an empty tile");
+				trace("Error: Interacting with a null unit");
 				return;
 			}
-			
-			var unit:Unit = interact.resident;
 			
 			if(unit is Fire)
 			{
@@ -28,15 +26,8 @@
 			}
 		}
 		
-		override public function CanInteract(interact:Tile):Boolean
+		override public function CanInteract(unit:Unit):Boolean
 		{
-			if (tile.IsOpen())
-			{
-				return false;
-			}
-			
-			var unit:Unit = interact.resident;
-			
 			return unit is Fire;
 		}
 
