@@ -104,62 +104,35 @@
 		public function LookTowards(tile:Tile, clip:MovieClip = null):void
 		{
 			
-			trace("hrmph2 " + tile + " clip " + clip + " x " + x + " y " + y);
 			if (x < tile.x)
 			{
 				// moving right
 				_model.rotation = Math.PI / 2;
-				if(_animClip != null)
-				{
-					_animClip.rotation = Math.PI / 2;
-				}
-				if(clip != null)
-				{
-					trace("asdasd");
-					clip.rotation = Math.PI / 2;
-				}
 			}
 			else if (x > tile.x)
 			{
 				// moving left
 				_model.rotation = Math.PI + Math.PI / 2;
-				if(_animClip != null)
-				{
-					_animClip.rotation = Math.PI + Math.PI / 2;
-				}
-				if(clip != null)
-				{
-					trace("asdasd");
-					clip.rotation = Math.PI + Math.PI / 2;
-				}
 			}
 			else if (y < tile.y)
 			{
 				// moving down
 				_model.rotation = Math.PI;
-				if(_animClip != null)
-				{
-					_animClip.rotation = Math.PI;
-				}
-				if(clip != null)
-				{
-					trace("asdasd");
-					clip.rotation = Math.PI;
-				}
 			}
 			else if (y > tile.y)
 			{
 				// moving up
 				_model.rotation = 0;
-				if(_animClip != null)
-				{
-					_animClip.rotation = 0;
-				}
-				if(clip != null)
-				{
-					trace("asdasd");
-					clip.rotation = 0;
-				}
+			}
+			
+			
+			if(_animClip != null)
+			{
+				_animClip.rotation = _model.rotation;
+			}
+			if(clip != null)
+			{
+				clip.rotation = _model.rotation;
 			}
 		}
 		
