@@ -13,6 +13,13 @@
 		[Embed(source="/assets/TestSpriteSheet.png")]
 		private static const TestAnimAtlas:Class;
 		
+		
+		[Embed(source="/assets/RobotIdle.xml",mimeType="application/octet-stream")]
+		private static const RobotIdleXML:Class;
+		
+		[Embed(source="/assets/RobotIdle.png")]
+		private static const RobotIdleAtlas:Class;
+		
 		[Embed(source="/assets/tile.png")]
 		private static const TileBorder:Class;
 		
@@ -21,6 +28,9 @@
 		
 		[Embed(source="/assets/interceptor.png")]
 		private static const Interceptor:Class;
+		
+		[Embed(source="/assets/overlay_move.png")]
+		private static const OverlayMove:Class;
 		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();

@@ -15,13 +15,16 @@
 		public var terrain:Terrain;
 		public var resident:Unit;
 		public var bIsActive:Boolean;
-
+		
+		public var xindex:uint, yindex:uint;
+		
 		public function Tile(x:int, y:int)
 		{
 			super();
 			
-			this.x = x;
-			this.y = y;
+			xindex = x;
+			yindex = y;
+			bIsActive = true;
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
         	addEventListener(TouchEvent.TOUCH, OnClick);
@@ -37,13 +40,14 @@
 		public function OnClick(e:TouchEvent) {
 			var touch:Touch = e.getTouch(this);  
             if (touch && touch.phase == TouchPhase.ENDED) {  
-				var _mc:Image = new Image(Assets.getTexture("TileInner"));
-				addChildAt(_mc, 0);
+				//var _mc:Image = new Image(Assets.getTexture("TileInner"));
+				//addChildAt(_mc, 0);
 				
-					Game.GetInstance().ToggleCinematic(true);
 				if(resident != null)
 				{
-					Game.GetInstance()._targeter.ShowOverlay(resident);
+					//Game.GetInstance().ToggleCinematic(true);
+					resident.MoveTo(Game.GetInstance()._level.Map[2][1]);
+					Game.GetInstance()._level._targeter.ShowOverlay(resident);
 				}
             }
 		}
@@ -56,7 +60,16 @@
 		public function SetResident(u:Unit)
 		{
 			resident = u;
-			u.tile = this;
+			resident.tile = this;
+		}
+		
+		public function RemoveResident()
+		{
+			if(resident != null)
+			{
+				resident.tile = null;
+				resident = null;
+			}
 		}
 	
 		public function SetActive(b:Boolean)
@@ -68,6 +81,11 @@
 		{
 			return bIsActive;
 		}
+		
+		public function toString() : String
+        {
+            return "(" + xindex + ", " + yindex + ")";
+        }
 
 	}
 	
