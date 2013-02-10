@@ -24,13 +24,12 @@
 		var AllUnits:Vector.<Actor>
 		var enemy:EnemyPlayer;
 		var playersUnits:Vector.<Actor>;
-		var _TurnCount:TextField;
+		var _TurnCount:TextField, _announceText:TextField;
 		var turnNum:uint;
 
 		public function Game() 
 		{
 			_instance = this;
-			bIntercepting = false;
 			turnNum = 1;
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
@@ -41,15 +40,13 @@
 			CreateGameField();
 			CreateUI();
 			
-			playersUnits = new Vector.<Actor>;
-			enemy = new EnemyPlayer();
-			_level.init();
-			
-			for each (var u:Object in Level1.Units)
-			{
-				CreateUnitAt(u["class"], u["x"], u["y"]);
-			}
+			BeginPlayerTurn();
 		}
+		
+		private function StartGame()
+		{
+		}
+		
 		
 		public function CreateUnitAt(unitClass:Class, x:uint, y:uint):void
 		{
@@ -113,6 +110,17 @@
 			_interceptor = new Sprite();
         	_interceptor.addEventListener(TouchEvent.TOUCH, InterceptorClicked);
 			_interceptor.addChild( new Image(Assets.getTexture("Interceptor")) );
+			addChild(_interceptor);
+			bIntercepting = true;
+			
+			playersUnits = new Vector.<Actor>;
+			enemy = new EnemyPlayer();
+			_level.init();
+			
+			for each (var u:Object in Level1.Units)
+			{
+				CreateUnitAt(u["class"], u["x"], u["y"]);
+			}
 		}
 		
 		private function CreateUI():void
@@ -122,6 +130,11 @@
 			_NextTurn.x = 1024 - _NextTurn.height;
 			_NextTurn.y = 800 - _NextTurn.height;
 			addChild(_NextTurn);
+			
+			_announceText = new TextField(1024,800,"","Verdana",40,0x000000,true);
+			_announceText.visible = false;
+			_announceText.alpha = 0;
+			addChild(_announceText);
 			
 			_TurnCount = new TextField(256,64,"","Verdana",40,0xFFFFFF,true);
 			_TurnCount.underline = true;
@@ -170,6 +183,42 @@
 			}
 		}
 		
+		public function DisableCinematic():void
+		{
+			ToggleCinematic(false);
+			StartGame();
+		}
+		
+		public function EnableCinematic():void
+		{
+			ToggleCinematic(true);
+		}
+		
+		public function Announce(text:String, callBack:Function = null)
+		{
+			_announceText.text = text;
+			_announceText.visible = true;
+			
+			var tween:Tween = new Tween(_announceText, 1, Transitions.LINEAR);
+			tween.fadeTo(1);
+			tween.animate("visible", 1);
+			tween.repeatCount = 2;
+			tween.reverse = true;
+			
+			if (callBack != null)
+			{
+				tween.onComplete = callBack;
+			}
+			
+			Starling.juggler.add(tween);
+		}
+		
+		public function BeginPlayerTurn():void
+		{
+			ToggleCinematic(true);
+			Announce("Your Turn!", DisableCinematic);
+		}
+		
 		public function EndPlayerTurn(e:Event):void
 		{	
 			ToggleCinematic(true);
@@ -179,7 +228,12 @@
 				item.NewTurn();
 			}
 			
-			enemy.TakeTurn();
+			BeginEnemyTurn();
+		}
+		
+		public function BeginEnemyTurn():void
+		{
+			Announce("Enemy Turn!", enemy.TakeTurn);
 		}
 		
 		public function EndEnemyTurn():void
@@ -188,7 +242,7 @@
 			
 			turnNum++;
 			UpdateUI();
-			ToggleCinematic(false);
+			BeginPlayerTurn();
 		}
 		
 		
