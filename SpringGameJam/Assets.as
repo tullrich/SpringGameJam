@@ -64,6 +64,9 @@
 		[Embed(source="/assets/overlay_interact.png")]
 		private static const OverlayInteract:Class;
 		
+		[Embed(source="/assets/overlay_target.png")]
+		private static const OverlayTarget:Class;
+		
 		[Embed(source="/assets/Airplane2.png")]
 		private static const BgAirplane:Class;
 		
@@ -118,11 +121,35 @@
 		[Embed(source="/assets/NormalConsole.png")]
 		private static const NormalConsole:Class;
 		
+		[Embed(source="/assets/ConsoleBroken.xml",mimeType="application/octet-stream")]
+		private static const ConsoleBrokenXML:Class;
+		
 		[Embed(source="/assets/ConsoleBroken.png")]
 		private static const ConsoleBrokenAtlas:Class;
 		
-		[Embed(source="/assets/ConsoleBroken.xml",mimeType="application/octet-stream")]
-		private static const ConsoleBrokenXML:Class;
+		[Embed(source="/assets/MedicAttack.xml",mimeType="application/octet-stream")]
+		private static const MedicAttackXML:Class;
+		
+		[Embed(source="/assets/MedicAttack.png")]
+		private static const MedicAttackAtlas:Class;
+		
+		[Embed(source="/assets/SamIdle.xml",mimeType="application/octet-stream")]
+		private static const SamIdleXML:Class;
+		
+		[Embed(source="/assets/SamIdle.png")]
+		private static const SamIdleAtlas:Class;
+		
+		[Embed(source="/assets/SamAttack.xml",mimeType="application/octet-stream")]
+		private static const SamAttackXML:Class;
+		
+		[Embed(source="/assets/SamAttack.png")]
+		private static const SamAttackAtlas:Class;
+		
+		[Embed(source="/assets/SamWalk.xml",mimeType="application/octet-stream")]
+		private static const SamWalkXML:Class;
+		
+		[Embed(source="/assets/SamWalk.png")]
+		private static const SamWalkAtlas:Class;
 		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();

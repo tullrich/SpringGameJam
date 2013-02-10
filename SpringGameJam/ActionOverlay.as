@@ -44,6 +44,7 @@
 		
 		private function CreateOverlayTiles()
 		{
+			// add the blue move overlays
 			for each (var akey:Tile in reachable)
 			{
 				var _mc:Image = new Image(Assets.getTexture("OverlayMove"));
@@ -55,6 +56,7 @@
 				addChildAt(_mc, 0);
 			}
 			
+			// add green interact overlays
 			for each (var bkey:Tile in interactable)
 			{
 				var _mc2:Image = new Image(Assets.getTexture("OverlayInteract"));
@@ -66,7 +68,15 @@
 				addChildAt(_mc2, 0);
 			}
 			
-				 
+			// add the orange overlay under the picked unit
+			var _mc3:Image = new Image(Assets.getTexture("OverlayTarget"));
+			_mc3.touchable = false;
+			_mc3.scaleX = 0.75;
+			_mc3.scaleY = 0.75;
+			_mc3.x = originTile.x;
+			_mc3.y = originTile.y;
+			addChildAt(_mc3, 0);
+			 
 		}
 		
 		private function ComputePaths():void

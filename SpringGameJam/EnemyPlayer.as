@@ -88,6 +88,7 @@
 			else
 			{
 				_targeter.HideOverlay();
+				NextAction();
 			}
 		}
 		
