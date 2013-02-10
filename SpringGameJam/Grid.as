@@ -38,16 +38,12 @@
 			var dim_x:int = xTiles;
 			var dim_y:int = yTiles;
 			
-			trace("height " + height + " width " + width);
-			trace("dim_x " + dim_x + " dim_y " + dim_y);
-			
 			for(var i:int = 0; i < dim_x; i++)
 			{
 				var innerArray:Dictionary = new Dictionary();
 				for(var j:int = 0; j < dim_y; j++)
 				{
 					innerArray[j] = CreateShapeAt(i, j);
-					innerArray[j].bIsActive = (mapinfo[j][i] == 0);
 				}
 				
 				Map[i] = innerArray;
@@ -69,6 +65,7 @@
 			var newtile:Tile = new Tile(x, y);
 			newtile.x = x * tileSize;
 			newtile.y = y * tileSize;
+			newtile.bIsActive = mapinfo[y][x] != 0;
 			addChild(newtile); 
 			
 			return newtile;
@@ -101,8 +98,6 @@
 			{
 				adjacent.push(Map[tile.xindex][tile.yindex - 1]);
 			}
-			
-			trace(tile + " adjacent to " + adjacent);
 			
 			return adjacent;
 		}

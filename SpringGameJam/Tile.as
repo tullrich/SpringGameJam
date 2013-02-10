@@ -35,11 +35,13 @@
 		
 		public function init(e:Event):void
 		{
-			
-			var _mc:Image = new Image(Assets.getTexture("TileBorder"));
-			_mc.scaleX = 0.375;
-			_mc.scaleY = 0.375;
-			addChildAt(_mc, 0);
+			if (bIsActive)
+			{
+				var _mc:Image = new Image(Assets.getTexture("TileBorder"));
+				_mc.scaleX = 0.375;
+				_mc.scaleY = 0.375;
+				addChildAt(_mc, 0);
+			}
 		}
 		
 		public function OnClick(e:TouchEvent) {
@@ -97,6 +99,11 @@
         {
             return "(" + xindex + ", " + yindex + ")";
         }
+		
+		public function IsInteractableBy(u:Unit):Boolean
+		{
+			return (resident != null && resident.bIsInteractable);
+		}
 
 	}
 	

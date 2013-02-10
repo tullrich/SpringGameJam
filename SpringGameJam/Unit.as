@@ -13,6 +13,7 @@
 		var _tile:Tile;
 		var tweenPath:Vector.<Tile>;
 		var model:MovieClip;
+		var bIsInteractable:Boolean;
 		
 		var IdleAnimation:String;
 		

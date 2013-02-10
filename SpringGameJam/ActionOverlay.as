@@ -105,7 +105,7 @@
 										tempOpen.push(neighbor);
 										came_from[neighbor] = curTile;
 									}
-									else
+									else if (neighbor.IsInteractableBy(target))
 									{
 										if(interactable.indexOf(neighbor,0) == -1)
 											interactable.push(neighbor);
@@ -158,10 +158,13 @@
 			
 			if (reachable.indexOf(clicked) != -1)
 			{
-				trace("clicked overlay");
 				
 				target.MoveTo(clicked, BuildPath(clicked));
 				HideOverlay();
+			}
+			else if(interactable.indexOf(clicked) != -1)
+			{
+				
 			}
 			else
 			{

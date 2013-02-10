@@ -31,8 +31,11 @@
 		private function init():void
 		{
 			_level.init();
-			CreateUnitAt(Robot, 1, 3);
-			CreateUnitAt(Fireman, 1, 2);
+			
+			for each (var u:Object in Level1.Units)
+			{
+				CreateUnitAt(u["class"], u["x"], u["y"]);
+			}
 		}
 		
 		public function CreateUnitAt(unitClass:Class, x:uint, y:uint):void

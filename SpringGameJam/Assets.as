@@ -19,6 +19,12 @@
 		[Embed(source="/assets/RobotIdle.png")]
 		private static const RobotIdleAtlas:Class;
 		
+		[Embed(source="/assets/MechanicIdle.xml",mimeType="application/octet-stream")]
+		private static const MechanicIdleXML:Class;
+		
+		[Embed(source="/assets/MechanicIdle.png")]
+		private static const MechanicIdleAtlas:Class;
+		
 		[Embed(source="/assets/MechanicWalk.xml",mimeType="application/octet-stream")]
 		private static const MechanicWalkXML:Class;
 		
@@ -45,6 +51,13 @@
 		
 		[Embed(source="/assets/WaterBackground.png")]
 		private static const BgWater:Class;
+		
+		[Embed(source="/assets/Fire.xml",mimeType="application/octet-stream")]
+		private static const FireXML:Class;
+		
+		[Embed(source="/assets/Fire.png")]
+		private static const FireAtlas:Class;
+		
 		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
