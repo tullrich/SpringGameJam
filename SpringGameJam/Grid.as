@@ -78,7 +78,7 @@
 			}
 			
 			// left side
-			if (tile.xindex - 1 > 0)
+			if (tile.xindex - 1 >= 0)
 			{
 				adjacent.push(Map[tile.xindex - 1][tile.yindex]);
 			}
@@ -90,7 +90,7 @@
 			}
 			
 			// top side
-			if (tile.yindex - 1 > 0)
+			if (tile.yindex - 1 >= 0)
 			{
 				adjacent.push(Map[tile.xindex][tile.yindex - 1]);
 			}
@@ -103,6 +103,18 @@
 		public function GetActionOverlay():ActionOverlay
 		{
 			return _targeter;
+		}
+		
+		public function HandleClick(clicked:Tile):Boolean
+		{
+			if (_targeter.IsVisible())
+			{
+				_targeter.HandleClick(clicked);
+			
+				return true;
+			}
+			
+			return false;
 		}
 		
 
