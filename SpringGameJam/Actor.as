@@ -46,7 +46,11 @@
 			currentHealth -= d;
 			if(currentHealth >= 0)
 			{
-				_hp.text = "HP:" + currentHealth +"/"+ maxHealth;
+				_hp.text = currentHealth +"/"+ maxHealth;
+			}
+			else
+			{
+				
 			}
 		}
 		
