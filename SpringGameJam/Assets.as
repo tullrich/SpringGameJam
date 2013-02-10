@@ -97,6 +97,12 @@
 		[Embed(source="/assets/SnakeIdle.png")]
 		private static const SnakeIdleAtlas:Class;
 		
+		[Embed(source="/assets/SnakeAttack.xml",mimeType="application/octet-stream")]
+		private static const SnakeAttackXML:Class;
+		
+		[Embed(source="/assets/SnakeAttack.png")]
+		private static const SnakeAttackAtlas:Class;
+		
 		[Embed(source="/assets/RobotAttack.xml",mimeType="application/octet-stream")]
 		private static const RobotAttackXML:Class;
 		

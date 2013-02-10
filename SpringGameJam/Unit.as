@@ -176,6 +176,15 @@
 			}
 		}
 		
+		public function GainHealth(h:int)
+		{
+			if (currentHealth < 5)
+			{
+				currentHealth++;
+				_hp.text = "" + currentHealth;
+			}
+		}
+		
 		public function disable():void
 		{
 			_model.filter = GrayScaleFilter;

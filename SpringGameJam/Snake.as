@@ -6,7 +6,7 @@
 			movementSpeed = 5;
 			bPlayerControlled = false;
 			IdleAnimation = "SnakeIdle";
-			AttackAnimation = "FiremanAttack";
+			AttackAnimation = "SnakeAttack";
 			WalkAnimation = "SnakeIdle";
 		}
 		
