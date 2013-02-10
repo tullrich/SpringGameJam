@@ -160,6 +160,19 @@
 		{
 			return bPlayerControlled;
 		}
+		
+		override public function TakeDamage(d:int)
+		{
+			currentHealth -= d;
+			if(currentHealth >= 0)
+			{
+				_hp.text = "" + currentHealth;
+			}
+			else
+			{
+				Game.GetInstance().RemoveUnit(this);
+			}
+		}
 
 	}
 	

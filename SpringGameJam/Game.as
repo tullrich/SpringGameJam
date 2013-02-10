@@ -72,6 +72,25 @@
 			return u;
 		}
 		
+		public function RemoveUnit(unit:Actor)
+		{
+			var playerIndex = playersUnits.indexOf(this);
+			var enemyIndex = enemy.units.indexOf(this);
+			
+			if(playerIndex != -1)
+			{
+				playersUnits.splice(playerIndex,1);
+			}
+			
+			if(enemyIndex != -1)
+			{
+				enemy.units.splice(enemyIndex,1);
+			}
+			
+			unit._tile.resident = null;
+			_level.RemoveUnit(unit);
+		}
+		
 		private function CreateBackground():void
 		{
 			var _mc:Image = new Image(Assets.getTexture("BgWater"));

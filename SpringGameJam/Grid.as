@@ -36,6 +36,11 @@
 			}
 		}
 		
+		public function RemoveUnit(u:Actor):void
+		{
+			removeChild(u);
+		}
+		
 		
 		public function init():void
 		{
