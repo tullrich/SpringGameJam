@@ -41,6 +41,7 @@
 				return;
 			}
 			
+			//path.pop();
 			tweenPath = path;
 			Game.GetInstance().ToggleCinematic(true);
 			

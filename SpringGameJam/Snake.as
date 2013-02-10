@@ -1,11 +1,10 @@
 ﻿package SpringGameJam {
 	
-	public class Medic extends Actor {
+	public class Snake extends Actor {
 
-		public function Medic() {
-			
+		public function Snake() {
 			movementSpeed = 5;
-			bPlayerControlled = true;
+			bPlayerControlled = false;
 			IdleAnimation = "MedicIdle";
 			AttackAnimation = "FiremanAttack";
 			WalkAnimation = "MechanicWalk";

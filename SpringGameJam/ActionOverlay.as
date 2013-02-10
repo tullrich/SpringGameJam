@@ -147,18 +147,11 @@
 			path.push(dest);
 			
 			var cur:Tile = dest;
-			while (true)
+			while (cur != originTile)
 			{
 				cur = came_from[cur];
+				path.unshift(cur);
 				
-				if ( cur != originTile )
-				{
-					path.unshift(cur);
-				}
-				else
-				{
-					break;
-				}
 			}
 			
 			return path;
