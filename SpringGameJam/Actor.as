@@ -19,6 +19,8 @@
 		var bHasAttacked:Boolean;
 		var _hp:TextField;
 		
+		var movementAnimation:String;
+		
 		public function Actor() 
 		{
 			super();
@@ -50,6 +52,52 @@
 			{
 				
 			}
+		}
+		
+		public function MoveTo(newTile:Tile, path:Vector.<Tile>):void
+		{
+			trace("moveto");
+			
+			if(!visible)
+			{
+				Place(newTile);
+				return;
+			}
+			
+			tweenPath = path;
+			Game.GetInstance().ToggleCinematic(true);
+			
+			if (_tile != null)
+			{
+				_tile.RemoveResident();
+			}
+			newTile.SetResident(this);
+			
+			TickPath()
+		}
+		
+		public function TickPath()
+		{
+			if(tweenPath.length > 0)
+			{
+				var nextTile:Tile = tweenPath.shift();
+				var tween:Tween = new Tween(this, .1, Transitions.LINEAR);
+				tween.animate("x", nextTile.x);
+				tween.animate("y", nextTile.y);
+				tween.onComplete = TickPath;
+				Starling.juggler.add(tween);
+				
+				LookTowards(nextTile);
+			}
+			else
+			{
+				MoveCompleted();
+			}
+		}
+		
+		public function MoveCompleted():void
+		{
+			Game.GetInstance().ToggleCinematic(false);
 		}
 
 	}

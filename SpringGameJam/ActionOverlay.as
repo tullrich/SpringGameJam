@@ -7,7 +7,7 @@
 	
 	public class ActionOverlay extends Sprite {
 	
-		var target:Unit;
+		var target:Actor;
 		var originTile:Tile;
 		
 		var came_from:Dictionary = new Dictionary();
@@ -31,7 +31,7 @@
 		}
 		
 		
-		public function ShowOverlay(target:Unit):void
+		public function ShowOverlay(target:Actor):void
 		{
 			this.target = target;
 			this.originTile = target._tile;
@@ -48,6 +48,8 @@
 			{
 				var _mc:Image = new Image(Assets.getTexture("OverlayMove"));
 				_mc.touchable = false;
+				_mc.scaleX = 0.375;
+				_mc.scaleY = 0.375;
 				_mc.x = akey.x;
 				_mc.y = akey.y;
 				addChildAt(_mc, 0);
@@ -57,6 +59,8 @@
 			{
 				var _mc2:Image = new Image(Assets.getTexture("OverlayInteract"));
 				_mc2.touchable = false;
+				_mc2.scaleX = 0.375;
+				_mc2.scaleY = 0.375;
 				_mc2.x = bkey.x;
 				_mc2.y = bkey.y;
 				addChildAt(_mc2, 0);
@@ -101,7 +105,7 @@
 										tempOpen.push(neighbor);
 										came_from[neighbor] = curTile;
 									}
-									else
+									else if (neighbor.IsInteractableBy(target))
 									{
 										if(interactable.indexOf(neighbor,0) == -1)
 											interactable.push(neighbor);
@@ -154,10 +158,13 @@
 			
 			if (reachable.indexOf(clicked) != -1)
 			{
-				trace("clicked overlay");
 				
 				target.MoveTo(clicked, BuildPath(clicked));
 				HideOverlay();
+			}
+			else if(interactable.indexOf(clicked) != -1)
+			{
+				
 			}
 			else
 			{

@@ -11,6 +11,8 @@
 			damage = 10;
 			bHasMoved = false;
 			bHasAttacked = false;
+			IdleAnimation = "MechanicIdle";
+			movementAnimation = "";
 		}
 
 	}

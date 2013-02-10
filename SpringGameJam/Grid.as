@@ -9,12 +9,18 @@
 	public class Grid extends Sprite {
 		
 		var xTiles:uint, yTiles:uint;
+		var mapinfo:Array;
+		var tileSize;uint;
+		
 		var Map:Dictionary = new Dictionary();
 		var _targeter:ActionOverlay;
 
-		public function Grid(x:uint, y:uint) {
+		public function Grid(x:uint, y:uint, info:Array) {
 			xTiles = x;
 			yTiles = y;
+			
+			mapinfo = info;
+			tileSize = 24;
 		}
 		
 		public function AddUnit(u:Unit, x:int, y:int):void
@@ -31,9 +37,6 @@
 		{
 			var dim_x:int = xTiles;
 			var dim_y:int = yTiles;
-			
-			trace("height " + height + " width " + width);
-			trace("dim_x " + dim_x + " dim_y " + dim_y);
 			
 			for(var i:int = 0; i < dim_x; i++)
 			{
@@ -60,8 +63,9 @@
 		private function CreateShapeAt(x:int, y:int):Tile
 		{
 			var newtile:Tile = new Tile(x, y);
-			newtile.x = x * 64;
-			newtile.y = y * 64;
+			newtile.x = x * tileSize;
+			newtile.y = y * tileSize;
+			newtile.bIsActive = mapinfo[y][x] != 0;
 			addChild(newtile); 
 			
 			return newtile;
@@ -94,8 +98,6 @@
 			{
 				adjacent.push(Map[tile.xindex][tile.yindex - 1]);
 			}
-			
-			trace(tile + " adjacent to " + adjacent);
 			
 			return adjacent;
 		}
