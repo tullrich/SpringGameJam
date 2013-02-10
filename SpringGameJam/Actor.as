@@ -99,6 +99,12 @@
 		{
 			Game.GetInstance().ToggleCinematic(false);
 		}
+		
+		public function ResetMoves()
+		{
+			bHasMoved = false;
+			bHasAttacked = false;
+		}
 
 	}
 	
