@@ -48,7 +48,10 @@
 								  {"class":Fireman, "x":10, "y":14 },
 								  {"class":Medic, "x":30, "y":14 },
 								  {"class":Mechanic, "x":27, "y":14 },
-								  {"class":Snake, "x":27, "y":17 }
+								  {"class":Snake, "x":27, "y":17 },
+								  {"class":Snake, "x":21, "y":17 },
+								  {"class":Snake, "x":21, "y":6 },
+								  {"class":Snake, "x":20, "y":27 }
 								  ];
 	}
 	

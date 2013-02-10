@@ -12,8 +12,6 @@
 		
 		public function TryToSpread()
 		{
-			trace("trying to spread");
-			
 			var chance:int = Math.floor(Math.random() * 2);
 			
 			if (chance)
@@ -21,7 +19,6 @@
 				for each(var t:Tile in Game.GetInstance()._level.GetFreeAdjacent(_tile))
 				{
 					 Game.GetInstance().CreateUnitAt(Fire, t.xindex, t.yindex);
-					trace("spreading");
 				}
 			}
 		}

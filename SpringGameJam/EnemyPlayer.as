@@ -36,9 +36,35 @@
 				{
 					Fire(u).TryToSpread();
 				}
+				else if( u is Actor)
+				{
+					Use(Actor(u));
+				}
 			}
 			
 			Game.GetInstance().EndEnemyTurn();
+		}
+		
+		private function Use(u:Actor):void
+		{
+			var _targeter:ActionOverlay = Game.GetInstance()._level._targeter;
+			_targeter.ShowOverlay(u);
+			
+			var index:int;
+			if (_targeter.interactable.length > 0)
+			{
+				index = Math.floor(Math.random() * _targeter.interactable.length);
+				_targeter.HandleClick(_targeter.interactable[index]);
+			}
+			if (_targeter.reachable.length > 0)
+			{
+				index = Math.floor(Math.random() * _targeter.reachable.length);
+				_targeter.HandleClick(_targeter.reachable[index]);
+			}
+			else
+			{
+				_targeter.HideOverlay();
+			}
 		}
 
 	}

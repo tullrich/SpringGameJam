@@ -81,8 +81,6 @@
 		
 		public function AnimCompleted(e:Event):void
 		{
-			trace("trace");
-			
 			_animClip.removeEventListeners();
 			_animClip.removeFromParent(true);
 			_animClip.dispose();
