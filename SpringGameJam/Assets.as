@@ -115,6 +115,15 @@
 		[Embed(source="/assets/RobotWalk.png")]
 		private static const RobotWalkAtlas:Class;
 		
+		[Embed(source="/assets/NormalConsole.png")]
+		private static const NormalConsole:Class;
+		
+		[Embed(source="/assets/ConsoleBroken.png")]
+		private static const ConsoleBrokenAtlas:Class;
+		
+		[Embed(source="/assets/ConsoleBroken.xml")]
+		private static const ConsoleBrokenXML:Class;
+		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
 		private static var _atlasAssets:Dictionary = new Dictionary();
