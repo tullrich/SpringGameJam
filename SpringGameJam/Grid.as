@@ -25,7 +25,7 @@
 		
 		public function AddUnit(u:Unit, x:int, y:int):void
 		{
-			if( Map[x][y] != null && Map[x][y].HasRoom())
+			if( Map[x][y] != null && Map[x][y].IsOpen())
 			{
 				addChild(u);
 				u.Place(Map[x][y])

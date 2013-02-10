@@ -8,6 +8,7 @@
 			super();
 			
 			movementSpeed = 2;
+			bPlayerControlled = true;
 			IdleAnimation = "RobotIdle";
 			movementAnimation = "";
 		}

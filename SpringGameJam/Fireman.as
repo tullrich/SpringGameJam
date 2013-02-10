@@ -6,6 +6,7 @@
 		public function Fireman() 
 		{
 			movementSpeed = 3;
+			bPlayerControlled = true;
 			IdleAnimation = "FiremanIdle";
 			AttackAnimation = "FiremanAttack";
 			movementAnimation = "";
@@ -13,7 +14,7 @@
 		
 		override public function Interact(interact:Tile):void
 		{
-			if (tile.HasRoom())
+			if (tile.IsOpen())
 			{
 				trace("Error: Interacting with an empty tile");
 				return;
@@ -29,7 +30,7 @@
 		
 		override public function CanInteract(interact:Tile):Boolean
 		{
-			if (tile.HasRoom())
+			if (tile.IsOpen())
 			{
 				return false;
 			}

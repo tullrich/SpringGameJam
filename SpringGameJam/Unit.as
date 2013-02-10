@@ -9,6 +9,7 @@
 	import starling.utils.VAlign;
 	import starling.utils.HAlign;
 	import starling.text.TextField;
+	import starling.filters.ColorMatrixFilter;
 	
 	public class Unit extends Sprite 
 	{
@@ -18,9 +19,12 @@
 		var bIsInteractable:Boolean;
 		var currentHealth:int;
 		var _hp:TextField;
+		var AnimCallback:Function;
 		
-		var AttackAnimation:String;
 		var IdleAnimation:String;
+		
+		static var GrayScaleFilter:ColorMatrixFilter = new ColorMatrixFilter();
+		GrayScaleFilter.adjustSaturation(-1);
 		
 		public function Unit() 
 		{
@@ -35,6 +39,7 @@
 		{		
 			// character model 
 			_model = new MovieClip(Assets.getTexturesFromAtlas(IdleAnimation), 4);
+			
 			_model.pivotX = _model.x = (_model.height) / 2;
 			_model.pivotY = _model.y = (_model.width) / 2;
 			_model.rotation = Math.PI + Math.PI / 2;
@@ -51,8 +56,10 @@
 			addChild(_hp);
 		}
 		
-		public function PlayAnimation(anim:MovieClip):void
+		public function PlayAnimation(anim:MovieClip, callBack:Function = null):void
 		{
+			AnimCallback = callBack;
+			
 			Game.GetInstance().ToggleCinematic(true);
 			_model.visible = false;
 			_model.stop();
@@ -68,11 +75,18 @@
 			MovieClip(e.target).removeEventListeners();
 			MovieClip(e.target).removeFromParent(true);
 			MovieClip(e.target).dispose();
-			trace("testtttt");
 			
 			_model.play();
 			_model.visible = true;
 			Game.GetInstance().ToggleCinematic(false);
+			
+			if (AnimCallback != null)
+			{
+				//  clear the callback before in case AnimCallback calls PlayAnimation again
+				var temp:Function = AnimCallback;
+				AnimCallback = null;
+				temp();
+			}
 		}
 		
 		public function LookTowards(tile:Tile, clip:MovieClip = null):void
@@ -146,14 +160,15 @@
 			}
 		}
 		
-		public function Attack(u:Unit):void
+		public function disable():void
 		{
-			var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas(AttackAnimation), 4);
-			anim.pivotX = anim.x = (anim.height) / 2;
-			anim.pivotY = anim.y = (anim.width) / 2;
-			LookTowards(u._tile, anim);
-			PlayAnimation(anim);
-			u.TakeDamage(1);
+			_model.filter = GrayScaleFilter;
+		}
+		
+		
+		public function enable():void
+		{
+			_model.filter = null;
 		}
 
 	}

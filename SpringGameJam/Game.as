@@ -88,16 +88,12 @@
 			tween4.animate("y", -1024);
 			Starling.juggler.add(tween4);
 			
-			
-			
-			
 			_mc = new Image(Assets.getTexture("BgAirplane"));
 			addChild(_mc);
 		}
 		
 		private function CreateGameField():void
 		{
-			
 			_level = new Grid(42, 33, Level1.Info);
 			addChild(_level);
 			
@@ -106,14 +102,12 @@
 			_interceptor.width = width;
         	_interceptor.addEventListener(TouchEvent.TOUCH, InterceptorClicked);
 			_interceptor.addChild( new Image(Assets.getTexture("Interceptor")) );
-			
-			//var _NextTurn:Button = new Button(NextTurnButtonUp,"NextTurn",NextTurnButtonDown);
-			//_NextTurn.addEventListener(TouchEvent.TOUCH, NextTurn);
 		}
 		
 		private function CreateUI():void
 		{
-			
+			//var _NextTurn:Button = new Button(NextTurnButtonUp,"NextTurn",NextTurnButtonDown);
+			//_NextTurn.addEventListener(TouchEvent.TOUCH, NextTurn);
 		}
 		
 		private function InterceptorClicked(e:TouchEvent)

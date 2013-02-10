@@ -12,8 +12,11 @@
 		var movementSpeed:int;
 		var bHasMoved:Boolean;
 		var bHasAttacked:Boolean;
+		var bPlayerControlled:Boolean;
 		var awaitingInteract:Tile;
+		var Victim:Unit;
 		
+		var AttackAnimation:String;
 		var movementAnimation:String;
 		
 		public function Actor() 
@@ -74,6 +77,7 @@
 			}
 			else
 			{
+				MarkDone();
 				Game.GetInstance().ToggleCinematic(false);
 			}
 			
@@ -100,6 +104,42 @@
 		public function CanInteract(interact:Tile):Boolean
 		{
 			return false;
+		}
+		
+		public function Attack(u:Unit):void
+		{
+			var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas(AttackAnimation), 4);
+			anim.pivotX = anim.x = (anim.height) / 2;
+			anim.pivotY = anim.y = (anim.width) / 2;
+			LookTowards(u._tile, anim);
+			Victim = u;
+			PlayAnimation(anim, AttackComplete);
+		}
+		
+		public function AttackComplete():void
+		{	
+			if( Victim != null)
+			{
+				Victim.TakeDamage(1);
+				Victim =  null;
+				MarkDone();
+			}
+		}
+		
+		public function MarkDone():void
+		{
+			bHasMoved = true;
+			disable();
+		}
+		
+		public function HasAction():Boolean
+		{
+			return !bHasMoved;
+		}
+		
+		public function IsPlayerControlled():Boolean
+		{
+			return bPlayerControlled;
 		}
 
 	}

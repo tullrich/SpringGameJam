@@ -60,14 +60,17 @@
 				{
 					//Game.GetInstance().ToggleCinematic(true);
 					//resident.MoveTo(Game.GetInstance()._level.Map[2][1]);
-					Game.GetInstance()._level._targeter.ShowOverlay(Actor(resident));
+					if(Actor(resident).IsPlayerControlled() && Actor(resident).HasAction())
+					{
+						Game.GetInstance()._level._targeter.ShowOverlay(Actor(resident));
+					}
 				}
             }
 		}
 		
-		public function HasRoom():Boolean
+		public function IsOpen():Boolean
 		{
-			return resident == null;
+			return bIsActive && resident == null;
 		}
 		
 		public function SetResident(u:Unit)
@@ -88,11 +91,6 @@
 		public function SetActive(b:Boolean)
 		{
 			bIsActive = b;
-		}
-		
-		public function IsOpen():Boolean
-		{
-			return bIsActive && HasRoom();
 		}
 		
 		public function toString() : String
