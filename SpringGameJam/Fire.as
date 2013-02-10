@@ -5,7 +5,7 @@
 		public function Fire() 
 		{
 			super();
-			
+			currentHealth = 1;
 			movementSpeed = 2;
 			IdleAnimation = "Fire";
 			AttackAnimation = "Fire";
@@ -13,7 +13,6 @@
 		
 		public function TryToSpread()
 		{
-			trace("trying to spread");
 			
 			var chance:int;
 			
@@ -35,7 +34,6 @@
 				if(chance)
 				{
 					Game.GetInstance().CreateUnitAt(Fire, t.xindex, t.yindex);
-					trace("spreading");
 				}
 			}
 		}

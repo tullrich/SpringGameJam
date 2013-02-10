@@ -27,6 +27,7 @@
 		var _TurnCount:TextField, _announceText:TextField, _AltitudeText:TextField;
 		var turnNum:uint;
 		var altitude:int;
+		var bCinematicOverride:Boolean;
 
 		public function Game() 
 		{
@@ -44,11 +45,7 @@
 			
 			BeginPlayerTurn();
 		}
-		
-		private function StartGame()
-		{
-			
-		}
+
 		
 		
 		public function CreateUnitAt(unitClass:Class, x:uint, y:uint):Unit
@@ -74,8 +71,8 @@
 		
 		public function RemoveUnit(unit:Actor)
 		{
-			var playerIndex = playersUnits.indexOf(this);
-			var enemyIndex = enemy.units.indexOf(this);
+			var playerIndex = playersUnits.indexOf(unit);
+			var enemyIndex = enemy.units.indexOf(unit);
 			
 			if(playerIndex != -1)
 			{
@@ -86,8 +83,6 @@
 			{
 				enemy.units.splice(enemyIndex,1);
 			}
-			
-			unit._tile.resident = null;
 			_level.RemoveUnit(unit);
 		}
 		
@@ -131,7 +126,7 @@
 		
 		private function CreateGameField():void
 		{
-			_level = new Grid(42, 33, Level1.Info);
+			_level = new Grid(21, 16, Level1.Info);
 			addChild(_level);
 			
 			_interceptor = new Sprite();
@@ -213,15 +208,21 @@
 			}
 			else if (!toggle && bIntercepting)
 			{
-				bIntercepting = false;
-				removeChild(_interceptor);
+				if (bCinematicOverride)
+				{
+					enemy.ActionComplete();
+				}
+				else
+				{
+					bIntercepting = false;
+					removeChild(_interceptor);
+				}
 			}
 		}
 		
 		public function DisableCinematic():void
 		{
 			ToggleCinematic(false);
-			StartGame();
 		}
 		
 		public function EnableCinematic():void
@@ -268,11 +269,13 @@
 		
 		public function BeginEnemyTurn():void
 		{
-			Announce("Enemy Turn!", enemy.TakeTurn);
+			bCinematicOverride = true;
+			Announce("Enemy Turn!", enemy.BeginTurn);
 		}
 		
 		public function EndEnemyTurn():void
 		{	
+			bCinematicOverride = false;
 			enemy.RestartUnits();
 			
 			turnNum++;

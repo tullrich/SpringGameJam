@@ -30,15 +30,15 @@
 		{
 			this.touchable = false;
 			addEventListener(Event.ADDED_TO_STAGE, init);
-			scaleX = 0.375;
-			scaleY = 0.375;
+			scaleX = 0.75;
+			scaleY = 0.75;
 			currentHealth = 5;
 		}
 		
 		public function init(e:Event):void
 		{		
 			// character model 
-			_model = new MovieClip(Assets.getTexturesFromAtlas(IdleAnimation), 4);
+			_model = new MovieClip(Assets.getTexturesFromAtlas(IdleAnimation), 6);
 			
 			_model.pivotX = _model.x = (_model.height) / 2;
 			_model.pivotY = _model.y = (_model.width) / 2;
@@ -60,7 +60,7 @@
 		{
 			AnimCallback = callBack;
 			
-			Game.GetInstance().ToggleCinematic(true);
+			//Game.GetInstance().ToggleCinematic(true);
 			_model.visible = false;
 			_model.stop();
 			
@@ -88,7 +88,7 @@
 			
 			_model.play();
 			_model.visible = true;
-			Game.GetInstance().ToggleCinematic(false);
+			//Game.GetInstance().ToggleCinematic(false);
 			
 			if (AnimCallback != null)
 			{

@@ -20,7 +20,7 @@
 			yTiles = y;
 			
 			mapinfo = info;
-			tileSize = 24;
+			tileSize = 48;
 		}
 		
 		public function AddUnit(u:Unit, x:int, y:int):void
@@ -38,6 +38,7 @@
 		
 		public function RemoveUnit(u:Actor):void
 		{
+			u._tile.RemoveResident();
 			removeChild(u);
 		}
 		
