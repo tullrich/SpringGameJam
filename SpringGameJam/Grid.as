@@ -30,6 +30,10 @@
 				addChild(u);
 				u.Place(Map[x][y])
 			}
+			else
+			{
+				trace("Could not place " + u + " at " + x + "x" + y);
+			}
 		}
 		
 		

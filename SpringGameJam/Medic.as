@@ -8,7 +8,7 @@
 			bPlayerControlled = true;
 			IdleAnimation = "MedicIdle";
 			AttackAnimation = "FiremanAttack";
-			WalkAnimation = "MedicWalk";
+			WalkAnimation = "MechanicWalk";
 		}
 
 	}

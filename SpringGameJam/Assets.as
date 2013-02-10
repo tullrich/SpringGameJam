@@ -91,6 +91,18 @@
 		[Embed(source="/assets/FiremanAttack.png")]
 		private static const FiremanAttackAtlas:Class;
 		
+		[Embed(source="/assets/SnakeIdle.xml",mimeType="application/octet-stream")]
+		private static const SnakeIdleXML:Class;
+		
+		[Embed(source="/assets/SnakeIdle.png")]
+		private static const SnakeIdleAtlas:Class;
+		
+		[Embed(source="/assets/RobotAttack.xml",mimeType="application/octet-stream")]
+		private static const RobotAttackXML:Class;
+		
+		[Embed(source="/assets/RobotAttack.png")]
+		private static const RobotAttackAtlas:Class;
+		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
 		private static var _atlasAssets:Dictionary = new Dictionary();
