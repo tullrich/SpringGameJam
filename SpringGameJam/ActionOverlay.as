@@ -12,6 +12,7 @@
 		
 		var came_from:Dictionary = new Dictionary();
 		var reachable:Vector.<Tile> = new Vector.<Tile>();
+		var interactable:Vector.<Tile> = new Vector.<Tile>();
 		var currentLevel:Grid;
 
 		public function ActionOverlay() 
@@ -35,7 +36,7 @@
 			this.target = target;
 			this.originTile = target._tile;
 			came_from =  new  Dictionary();
-			
+			interactable = new Vector.<Tile>();
 			ComputePaths();
 			CreateOverlayTiles();
 			visible = true;
@@ -43,14 +44,24 @@
 		
 		private function CreateOverlayTiles()
 		{
-			for each (var key:Tile in reachable)
+			for each (var akey:Tile in reachable)
 			{
 				var _mc:Image = new Image(Assets.getTexture("OverlayMove"));
 				_mc.touchable = false;
-				_mc.x = key.x;
-				_mc.y = key.y;
+				_mc.x = akey.x;
+				_mc.y = akey.y;
 				addChildAt(_mc, 0);
 			}
+			
+			for each (var bkey:Tile in interactable)
+			{
+				var _mc2:Image = new Image(Assets.getTexture("OverlayInteract"));
+				_mc2.touchable = false;
+				_mc2.x = bkey.x;
+				_mc2.y = bkey.y;
+				addChildAt(_mc2, 0);
+			}
+			
 				 
 		}
 		
@@ -89,6 +100,11 @@
 									{
 										tempOpen.push(neighbor);
 										came_from[neighbor] = curTile;
+									}
+									else
+									{
+										if(interactable.indexOf(neighbor,0) == -1)
+											interactable.push(neighbor);
 									}
 								}
 							}
