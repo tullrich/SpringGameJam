@@ -69,7 +69,8 @@
 								  {"class":Snake, "x":7, "y":8 },
 								  {"class":Snake, "x":7, "y":6 },
 								  {"class":Snake, "x":10, "y":5 },
-								  {"class":Snake, "x":10, "y":4 }
+								  {"class":Snake, "x":10, "y":4 },
+								  {"class":SystemUnit, "x":9, "y":4 }
 								  ];
 	}
 	
