@@ -18,7 +18,7 @@
 				return;
 			}
 			
-			if(unit is Actor)
+			if(unit is Actor || unit is SystemUnit)
 			{
 				Attack(unit);
 			}
@@ -26,7 +26,15 @@
 		
 		override public function CanInteract(unit:Unit):Boolean
 		{
-			return unit is Actor && Actor(unit).bPlayerControlled;
+			if( unit is Actor && Actor(unit).bPlayerControlled)
+			{
+				return true;
+			}
+			else if (unit is SystemUnit)
+			{
+				return true;
+			}
+			return false;
 		}
 	}
 	

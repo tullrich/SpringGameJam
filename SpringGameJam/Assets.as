@@ -121,7 +121,7 @@
 		[Embed(source="/assets/ConsoleBroken.png")]
 		private static const ConsoleBrokenAtlas:Class;
 		
-		[Embed(source="/assets/ConsoleBroken.xml")]
+		[Embed(source="/assets/ConsoleBroken.xml",mimeType="application/octet-stream")]
 		private static const ConsoleBrokenXML:Class;
 		
 		private static var _textureAssets:Dictionary = new Dictionary();
