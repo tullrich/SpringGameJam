@@ -64,7 +64,7 @@
 		[Embed(source="/assets/overlay_interact.png")]
 		private static const OverlayInteract:Class;
 		
-		[Embed(source="/assets/Airplane.png")]
+		[Embed(source="/assets/Airplane2.png")]
 		private static const BgAirplane:Class;
 		
 		[Embed(source="/assets/WaterBg2.png")]

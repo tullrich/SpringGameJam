@@ -27,23 +27,42 @@
 			}
 		}
 		
-		public function TakeTurn()
+		public function BeginTurn()
 		{
-			trace("enemy turn");
 			tempEnemies = units.slice();
 			
-			for each(var u:Actor in tempEnemies)
+			NextAction();
+		}
+		
+		public function NextAction()
+		{
+			if (tempEnemies.length > 0)
 			{
+				var u:Actor = tempEnemies.pop();
 				if(u is Fire && !u.bHasAttacked)
 				{
 					Fire(u).TryToSpread();
+					NextAction();
 				}
 				else if( u is Actor)
 				{
 					Use(Actor(u));
 				}
 			}
-			
+			else
+			{
+				CompleteTurn();
+			}
+		}
+		
+		public function ActionComplete()
+		{
+			NextAction();
+		}
+		
+		
+		private function CompleteTurn()
+		{
 			Game.GetInstance().EndEnemyTurn();
 		}
 		
@@ -54,6 +73,7 @@
 			
 			var index:int;
 			if (_targeter.interactable.length > 0)
+			//if( false)
 			{
 				index = Math.floor(Math.random() * _targeter.interactable.length);
 				_targeter.HandleClick(_targeter.interactable[index]);

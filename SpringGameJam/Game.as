@@ -27,6 +27,7 @@
 		var _TurnCount:TextField, _announceText:TextField, _AltitudeText:TextField;
 		var turnNum:uint;
 		var altitude:int;
+		var bCinematicOverride:Boolean;
 
 		public function Game() 
 		{
@@ -112,7 +113,7 @@
 		
 		private function CreateGameField():void
 		{
-			_level = new Grid(42, 33, Level1.Info);
+			_level = new Grid(21, 16, Level1.Info);
 			addChild(_level);
 			
 			_interceptor = new Sprite();
@@ -194,8 +195,15 @@
 			}
 			else if (!toggle && bIntercepting)
 			{
-				bIntercepting = false;
-				removeChild(_interceptor);
+				if (bCinematicOverride)
+				{
+					enemy.ActionComplete();
+				}
+				else
+				{
+					bIntercepting = false;
+					removeChild(_interceptor);
+				}
 			}
 		}
 		
@@ -249,11 +257,13 @@
 		
 		public function BeginEnemyTurn():void
 		{
-			Announce("Enemy Turn!", enemy.TakeTurn);
+			bCinematicOverride = true;
+			Announce("Enemy Turn!", enemy.BeginTurn);
 		}
 		
 		public function EndEnemyTurn():void
 		{	
+			bCinematicOverride = false;
 			enemy.RestartUnits();
 			
 			turnNum++;

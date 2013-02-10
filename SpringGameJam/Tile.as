@@ -38,8 +38,8 @@
 			if (bIsActive)
 			{
 				var _mc:Image = new Image(Assets.getTexture("TileBorder"));
-				_mc.scaleX = 0.375;
-				_mc.scaleY = 0.375;
+				_mc.scaleX = 0.75;
+				_mc.scaleY = 0.75;
 				addChildAt(_mc, 0);
 			}
 		}

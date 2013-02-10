@@ -30,7 +30,7 @@
 		override public function init(e:Event):void
 		{
 			super.init(e);
-			_hp.color = (bPlayerControlled) ? 0x00FF00 : 0xFFFFFF;
+			_hp.color = (bPlayerControlled) ? 0x00FF00 : 0xFF0000;
 		}
 		
 		public function MoveTo(newTile:Tile, path:Vector.<Tile>):void
@@ -137,6 +137,8 @@
 				Victim =  null;
 				EndTurn();
 			}
+			
+			Game.GetInstance().ToggleCinematic(false);
 		}
 		
 		public function EndTurn():void
