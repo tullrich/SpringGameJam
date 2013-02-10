@@ -17,7 +17,8 @@
 		var Victim:Unit;
 		
 		var AttackAnimation:String;
-		var movementAnimation:String;
+		var WalkAnimation:String;
+		var WalkClip:MovieClip;
 		
 		public function Actor() 
 		{
@@ -34,8 +35,6 @@
 		
 		public function MoveTo(newTile:Tile, path:Vector.<Tile>):void
 		{
-			trace("moveto");
-			
 			if(!visible)
 			{
 				Place(newTile);
@@ -44,6 +43,11 @@
 			
 			tweenPath = path;
 			Game.GetInstance().ToggleCinematic(true);
+			
+			WalkClip = new MovieClip(Assets.getTexturesFromAtlas(WalkAnimation), 4);
+			WalkClip.pivotX = WalkClip.x = (WalkClip.height) / 2;
+			WalkClip.pivotY = WalkClip.y = (WalkClip.width) / 2;
+			PlayAnimation(WalkClip, null, true);
 			
 			if (_tile != null)
 			{
@@ -64,8 +68,8 @@
 				tween.animate("y", nextTile.y);
 				tween.onComplete = TickPath;
 				Starling.juggler.add(tween);
-				
 				LookTowards(nextTile);
+				
 			}
 			else
 			{
@@ -75,6 +79,8 @@
 		
 		public function MoveCompleted():void
 		{
+			WalkClip.dispatchEventWith("AnimationReturn");
+			WalkClip = null;
 			
 			if(awaitingInteract != null)
 			{
@@ -117,9 +123,9 @@
 			var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas(AttackAnimation), 4);
 			anim.pivotX = anim.x = (anim.height) / 2;
 			anim.pivotY = anim.y = (anim.width) / 2;
-			LookTowards(u._tile, anim);
 			Victim = u;
 			PlayAnimation(anim, AttackComplete);
+			LookTowards(u._tile);
 		}
 		
 		public function AttackComplete():void

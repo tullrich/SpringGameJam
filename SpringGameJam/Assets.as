@@ -13,11 +13,23 @@
 		[Embed(source="/assets/TestSpriteSheet.png")]
 		private static const TestAnimAtlas:Class;
 		
+		[Embed(source="/assets/MedicWalk.xml",mimeType="application/octet-stream")]
+		private static const MedicWalkXML:Class;
+		
+		[Embed(source="/assets/MedicWalk.png")]
+		private static const MedicWalkAtlas:Class;
+		
 		[Embed(source="/assets/RobotIdle.xml",mimeType="application/octet-stream")]
 		private static const RobotIdleXML:Class;
 		
 		[Embed(source="/assets/RobotIdle.png")]
 		private static const RobotIdleAtlas:Class;
+		
+		[Embed(source="/assets/MedicIdle.xml",mimeType="application/octet-stream")]
+		private static const MedicIdleXML:Class;
+		
+		[Embed(source="/assets/MedicIdle.png")]
+		private static const MedicIdleAtlas:Class;
 		
 		[Embed(source="/assets/MechanicIdle.xml",mimeType="application/octet-stream")]
 		private static const MechanicIdleXML:Class;

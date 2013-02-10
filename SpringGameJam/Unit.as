@@ -16,7 +16,7 @@
 		var _tile:Tile;
 		var tweenPath:Vector.<Tile>;
 		var _model:MovieClip;
-		var bIsInteractable:Boolean;
+		var _animClip:MovieClip;
 		var currentHealth:int;
 		var _hp:TextField;
 		var AnimCallback:Function;
@@ -56,7 +56,7 @@
 			addChild(_hp);
 		}
 		
-		public function PlayAnimation(anim:MovieClip, callBack:Function = null):void
+		public function PlayAnimation(anim:MovieClip, callBack:Function = null, customStop:Boolean = false):void
 		{
 			AnimCallback = callBack;
 			
@@ -64,17 +64,29 @@
 			_model.visible = false;
 			_model.stop();
 			
-			anim.loop = false;
-			anim.addEventListener(Event.COMPLETE, AnimCompleted);
-			addChild(anim);
-			Starling.juggler.add(anim);
+			_animClip = anim;
+			_animClip.loop = customStop;
+			if (customStop)
+			{
+				_animClip.addEventListener("AnimationReturn", AnimCompleted);
+			}
+			else
+			{
+				_animClip.addEventListener(Event.COMPLETE, AnimCompleted);
+			}
+			
+			addChild(_animClip);
+			Starling.juggler.add(_animClip);
 		}
 		
 		public function AnimCompleted(e:Event):void
 		{
-			MovieClip(e.target).removeEventListeners();
-			MovieClip(e.target).removeFromParent(true);
-			MovieClip(e.target).dispose();
+			trace("trace");
+			
+			_animClip.removeEventListeners();
+			_animClip.removeFromParent(true);
+			_animClip.dispose();
+			_animClip = null;
 			
 			_model.play();
 			_model.visible = true;
@@ -91,30 +103,63 @@
 		
 		public function LookTowards(tile:Tile, clip:MovieClip = null):void
 		{
-			if (clip == null)
-			{
-				clip = _model;
-			}
 			
+			trace("hrmph2 " + tile + " clip " + clip + " x " + x + " y " + y);
 			if (x < tile.x)
 			{
 				// moving right
-				clip.rotation = Math.PI / 2;
+				_model.rotation = Math.PI / 2;
+				if(_animClip != null)
+				{
+					_animClip.rotation = Math.PI / 2;
+				}
+				if(clip != null)
+				{
+					trace("asdasd");
+					clip.rotation = Math.PI / 2;
+				}
 			}
 			else if (x > tile.x)
 			{
 				// moving left
-				clip.rotation = Math.PI + Math.PI / 2;
+				_model.rotation = Math.PI + Math.PI / 2;
+				if(_animClip != null)
+				{
+					_animClip.rotation = Math.PI + Math.PI / 2;
+				}
+				if(clip != null)
+				{
+					trace("asdasd");
+					clip.rotation = Math.PI + Math.PI / 2;
+				}
 			}
 			else if (y < tile.y)
 			{
 				// moving down
-				clip.rotation = Math.PI;
+				_model.rotation = Math.PI;
+				if(_animClip != null)
+				{
+					_animClip.rotation = Math.PI;
+				}
+				if(clip != null)
+				{
+					trace("asdasd");
+					clip.rotation = Math.PI;
+				}
 			}
 			else if (y > tile.y)
 			{
 				// moving up
-				clip.rotation = 0;
+				_model.rotation = 0;
+				if(_animClip != null)
+				{
+					_animClip.rotation = 0;
+				}
+				if(clip != null)
+				{
+					trace("asdasd");
+					clip.rotation = 0;
+				}
 			}
 		}
 		

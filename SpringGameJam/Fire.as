@@ -8,8 +8,6 @@
 			
 			movementSpeed = 2;
 			IdleAnimation = "Fire";
-			movementAnimation = "Fire";
-			bIsInteractable = true;
 		}
 		
 		public function TryToSpread()

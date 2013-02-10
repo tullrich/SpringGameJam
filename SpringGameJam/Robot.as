@@ -10,7 +10,7 @@
 			movementSpeed = 2;
 			bPlayerControlled = true;
 			IdleAnimation = "RobotIdle";
-			movementAnimation = "";
+			WalkAnimation = "MechanicWalk";
 		}
 		
 		override public function Interact(unit:Unit):void

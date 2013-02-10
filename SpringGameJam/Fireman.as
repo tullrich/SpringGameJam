@@ -9,7 +9,7 @@
 			bPlayerControlled = true;
 			IdleAnimation = "FiremanIdle";
 			AttackAnimation = "FiremanAttack";
-			movementAnimation = "";
+			WalkAnimation = "MedicWalk";
 		}
 		
 		override public function Interact(unit:Unit):void
