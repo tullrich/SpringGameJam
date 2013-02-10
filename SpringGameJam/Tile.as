@@ -15,6 +15,8 @@
 		public var terrain:Terrain;
 		public var resident:Unit;
 		public var bIsActive:Boolean;
+		public var currentMap:Grid;
+
 		
 		public var xindex:uint, yindex:uint;
 		
@@ -25,6 +27,7 @@
 			xindex = x;
 			yindex = y;
 			bIsActive = true;
+			currentMap = Game.GetInstance()._level;
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
         	addEventListener(TouchEvent.TOUCH, OnClick);
@@ -43,10 +46,16 @@
 				//var _mc:Image = new Image(Assets.getTexture("TileInner"));
 				//addChildAt(_mc, 0);
 				
+				if(currentMap.HandleClick(this))
+				{
+					return;
+				}
+				
+				
 				if(resident != null)
 				{
 					//Game.GetInstance().ToggleCinematic(true);
-					resident.MoveTo(Game.GetInstance()._level.Map[2][1]);
+					//resident.MoveTo(Game.GetInstance()._level.Map[2][1]);
 					Game.GetInstance()._level._targeter.ShowOverlay(resident);
 				}
             }
@@ -77,9 +86,9 @@
 			bIsActive = b;
 		}
 		
-		public function GetActive():Boolean
+		public function IsOpen():Boolean
 		{
-			return bIsActive;
+			return bIsActive && HasRoom();
 		}
 		
 		public function toString() : String

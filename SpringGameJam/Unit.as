@@ -14,14 +14,19 @@
 		
 		public function Unit() 
 		{
-			moveDistance = 2;
+			moveDistance = 7;
 			this.touchable = false;
 			addEventListener(Event.ADDED_TO_STAGE, init);
+			//this.pivotX = 32;
+			//this.pivotY = 32;
 		}
 		
 		public function init(e:Event):void
 		{		
-			var _mc:MovieClip = new MovieClip(Assets.getTexturesFromAtlas("RobotIdle"), 4);		 
+			var _mc:MovieClip = new MovieClip(Assets.getTexturesFromAtlas("RobotIdle"), 4);
+			_mc.pivotX = _mc.x = _mc.height / 2;
+			_mc.pivotY = _mc.y = _mc.width / 2;
+			_mc.rotation = Math.PI + Math.PI / 2;
 			addChild(_mc);
 			Starling.juggler.add(_mc);
 		}
@@ -36,14 +41,61 @@
 			return moveDistance;
 		}
 		
-		public function MoveTo(newTile:Tile):void
+		public function SetDirection():void
+		{
+			this.rotation = 90;
+		}
+		
+		public function MoveTo(newTile:Tile, path:Vector.<Tile>):void
 		{
 			trace("moveto");
 			
-			 var tween:Tween = new Tween(this, 2.0, Transitions.EASE_IN_OUT);
-			  tween.animate("x", newTile.x);
-			  tween.animate("y", newTile.y);
-			  Starling.juggler.add(tween);
+			if(!visible)
+			{
+				Place(newTile);
+				return;
+			}
+			
+			Game.GetInstance().ToggleCinematic(true);
+			
+			var tween:Tween, prevTween:Tween;
+			var i:int = 0;
+			for each(var nextTile:Tile in path)
+			{
+				trace(i + ". " + nextTile);
+				i++;
+				
+				tween = new Tween(this, .5, Transitions.LINEAR);
+			 	tween.animate("x", nextTile.x);
+			  	tween.animate("y", nextTile.y);
+				
+				if(prevTween == null)
+				{
+					// first tween
+					Starling.juggler.add(tween);
+				}
+				else
+				{
+					// every other tween
+					prevTween.nextTween = tween;
+				}
+				
+				prevTween = tween;
+			}
+			
+			tween.onComplete = MoveCompleted;
+			  
+			if (_tile != null)
+			{
+				_tile.RemoveResident();
+			}
+			
+			newTile.SetResident(this);
+		}
+		
+		public function MoveCompleted():void
+		{
+			Game.GetInstance().ToggleCinematic(false);
 		}
 		
 		public function Place(newTile:Tile):void

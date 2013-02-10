@@ -31,7 +31,8 @@
 		private function init():void
 		{
 			_level.init();
-			CreateUnitAt(Unit, 0, 0);
+			CreateUnitAt(Unit, 1, 3);
+			CreateUnitAt(Unit, 1, 2);
 		}
 		
 		public function CreateUnitAt(unitClass:Class, x:uint, y:uint):void
@@ -73,6 +74,7 @@
 		{
 			return _level;
 		}
+		
 		public function ToggleCinematic(toggle:Boolean):void
 		{
 			if(toggle && !bIntercepting)
