@@ -52,11 +52,11 @@
 				}
 				
 				
-				if(resident != null)
+				if(resident != null && resident is Actor)
 				{
 					//Game.GetInstance().ToggleCinematic(true);
 					//resident.MoveTo(Game.GetInstance()._level.Map[2][1]);
-					Game.GetInstance()._level._targeter.ShowOverlay(resident);
+					Game.GetInstance()._level._targeter.ShowOverlay(Actor(resident));
 				}
             }
 		}

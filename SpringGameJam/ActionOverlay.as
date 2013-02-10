@@ -7,7 +7,7 @@
 	
 	public class ActionOverlay extends Sprite {
 	
-		var target:Unit;
+		var target:Actor;
 		var originTile:Tile;
 		
 		var came_from:Dictionary = new Dictionary();
@@ -30,7 +30,7 @@
 		}
 		
 		
-		public function ShowOverlay(target:Unit):void
+		public function ShowOverlay(target:Actor):void
 		{
 			this.target = target;
 			this.originTile = target._tile;

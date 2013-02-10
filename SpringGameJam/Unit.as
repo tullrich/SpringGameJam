@@ -14,6 +14,8 @@
 		var tweenPath:Vector.<Tile>;
 		var model:MovieClip;
 		
+		var IdleAnimation:String;
+		
 		public function Unit() 
 		{
 			moveDistance = 7;
@@ -25,7 +27,7 @@
 		
 		public function init(e:Event):void
 		{		
-			model = new MovieClip(Assets.getTexturesFromAtlas("RobotIdle"), 4);
+			model = new MovieClip(Assets.getTexturesFromAtlas(IdleAnimation), 4);
 			model.pivotX = model.x = model.height / 2;
 			model.pivotY = model.y = model.width / 2;
 			model.rotation = Math.PI + Math.PI / 2;
@@ -43,58 +45,7 @@
 			return moveDistance;
 		}
 		
-		public function SetDirection():void
-		{
-			this.rotation = 90;
-		}
-		
-		public function MoveTo(newTile:Tile, path:Vector.<Tile>):void
-		{
-			trace("moveto");
-			
-			if(!visible)
-			{
-				Place(newTile);
-				return;
-			}
-			
-			tweenPath = path;
-			Game.GetInstance().ToggleCinematic(true);
-			
-			if (_tile != null)
-			{
-				_tile.RemoveResident();
-			}
-			newTile.SetResident(this);
-			
-			TickPath()
-		}
-		
-		public function TickPath()
-		{
-			if(tweenPath.length > 0)
-			{
-				var nextTile:Tile = tweenPath.shift();
-				var tween:Tween = new Tween(this, .5, Transitions.LINEAR);
-				tween.animate("x", nextTile.x);
-				tween.animate("y", nextTile.y);
-				tween.onComplete = TickPath;
-				Starling.juggler.add(tween);
-				
-				LookTowards(nextTile);
-			}
-			else
-			{
-				MoveCompleted();
-			}
-		}
-		
-		public function MoveCompleted():void
-		{
-			Game.GetInstance().ToggleCinematic(false);
-		}
-		
-		private function LookTowards(tile:Tile):void
+		public function LookTowards(tile:Tile):void
 		{
 			if (x < tile.x)
 			{
