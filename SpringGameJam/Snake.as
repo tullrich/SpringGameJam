@@ -5,9 +5,9 @@
 		public function Snake() {
 			movementSpeed = 5;
 			bPlayerControlled = false;
-			IdleAnimation = "MedicIdle";
+			IdleAnimation = "SnakeIdle";
 			AttackAnimation = "FiremanAttack";
-			WalkAnimation = "MechanicWalk";
+			WalkAnimation = "SnakeIdle";
 		}
 		
 		override public function Interact(unit:Unit):void
