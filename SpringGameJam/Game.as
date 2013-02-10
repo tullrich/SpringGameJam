@@ -31,7 +31,7 @@
 		private function init():void
 		{
 			_level.init();
-			CreateUnitAt(Unit, 0, 0);
+			CreateUnitAt(Actor, 0, 0);
 		}
 		
 		public function CreateUnitAt(unitClass:Class, x:uint, y:uint):void

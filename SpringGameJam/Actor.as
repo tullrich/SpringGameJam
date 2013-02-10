@@ -1,6 +1,12 @@
 ﻿package SpringGameJam 
 {
-	import starling.text.textField;
+	import starling.text.TextField;
+	import starling.display.Sprite;
+	import starling.events.Event;
+	import starling.core.Starling;
+	import starling.display.MovieClip;
+	import starling.animation.Tween;
+	import starling.animation.Transitions;
 	
 	public class Actor extends Unit
 	{
@@ -11,6 +17,7 @@
 		var damage:int;
 		var bHasMoved:Boolean;
 		var bHasAttacked:Boolean;
+		var _hp:TextField;
 		
 		public function Actor() 
 		{
@@ -22,14 +29,14 @@
 			damage = 10;
 			bHasMoved = false;
 			bHasAttacked = false;
+			_hp = new TextField(64,16,"","Verdana",12,0x000000,false);
 		}
 		
-		public function init(e:Event):void
-		{	
-			super(e);
-			var _hp:textField = new textField(64,16,hpString,"Verdana",12,0x0,false);		 
+		override public function init(e:Event):void
+		{	 
+			super.init(e);
+			_hp.text = hpString;
 			addChild(_hp);
-			Starling.juggler.add(_hp);
 		}
 		
 		public function takeDamage(d:int)
