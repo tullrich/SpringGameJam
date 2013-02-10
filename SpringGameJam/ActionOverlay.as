@@ -89,7 +89,11 @@
 				var tempOpen:Vector.<Tile> = new Vector.<Tile>()
 				for each (var curTile:Tile in openSet)
 				{
-					closedSet.push(curTile);
+					if(curTile != originTile)
+					{
+						closedSet.push(curTile);
+					}
+					
 					neighboringTiles = currentLevel.GetAdjacentTiles(curTile);
 					
 					for each (var neighbor:Tile in neighboringTiles)

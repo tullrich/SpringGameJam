@@ -12,6 +12,8 @@
 	import starling.animation.Tween;
 	import starling.animation.Transitions;
 	import starling.core.Starling;
+	import starling.utils.HAlign;
+	import starling.text.TextField;
 	
 	public class Game extends Sprite {
 		
@@ -20,13 +22,16 @@
 		var _interceptor:Sprite;
 		var bIntercepting;
 		var AllUnits:Vector.<Actor>
-		
-		var actors:Vector.<Unit>;
+		var enemy:EnemyPlayer;
+		var playersUnits:Vector.<Actor>;
+		var _TurnCount:TextField;
+		var turnNum:uint;
 
 		public function Game() 
 		{
 			_instance = this;
 			bIntercepting = false;
+			turnNum = 1;
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -36,6 +41,8 @@
 			CreateGameField();
 			CreateUI();
 			
+			playersUnits = new Vector.<Actor>;
+			enemy = new EnemyPlayer();
 			_level.init();
 			
 			for each (var u:Object in Level1.Units)
@@ -47,11 +54,17 @@
 		public function CreateUnitAt(unitClass:Class, x:uint, y:uint):void
 		{
 			var u:Unit = new unitClass();
-			_level.AddUnit(u, x, y);
-			/*if(u is Actor)
+			
+			if(u is Actor && Actor(u).IsPlayerControlled())
 			{
-				actors.push(u);
-			}*/
+				playersUnits.push(u);
+			}
+			else if(u is Actor)
+			{
+				enemy.ControlUnit(Actor(u));
+			}
+			
+			_level.AddUnit(u, x, y);
 		}
 		
 		private function CreateBackground():void
@@ -98,16 +111,30 @@
 			addChild(_level);
 			
 			_interceptor = new Sprite();
-			_interceptor.height = height;
-			_interceptor.width = width;
         	_interceptor.addEventListener(TouchEvent.TOUCH, InterceptorClicked);
 			_interceptor.addChild( new Image(Assets.getTexture("Interceptor")) );
 		}
 		
 		private function CreateUI():void
 		{
-			//var _NextTurn:Button = new Button(NextTurnButtonUp,"NextTurn",NextTurnButtonDown);
-			//_NextTurn.addEventListener(TouchEvent.TOUCH, NextTurn);
+			var _NextTurn:Button = new Button(Assets.getTexture("NextTurnButtonUp"), "Next Turn" , Assets.getTexture("NextTurnButtonDown"));
+			_NextTurn.addEventListener(Event.TRIGGERED, EndPlayerTurn);
+			_NextTurn.x = 1024 - _NextTurn.height;
+			_NextTurn.y = 800 - _NextTurn.height;
+			addChild(_NextTurn);
+			
+			_TurnCount = new TextField(256,64,"","Verdana",40,0xFFFFFF,true);
+			_TurnCount.underline = true;
+			_TurnCount.x = 20;
+			_TurnCount.y = 800 - 64;
+			_TurnCount.hAlign = HAlign.LEFT;
+			_TurnCount.text = "Turn " + turnNum;
+			addChild(_TurnCount);
+		}
+		
+		private function UpdateUI():void
+		{
+			_TurnCount.text = "Turn " + turnNum;
 		}
 		
 		private function InterceptorClicked(e:TouchEvent)
@@ -143,12 +170,25 @@
 			}
 		}
 		
-		public function NextTurn()
-		{
-			for each(var item:Actor in actors)
+		public function EndPlayerTurn(e:Event):void
+		{	
+			ToggleCinematic(true);
+			
+			for each(var item:Actor in playersUnits)
 			{
-				item.ResetMoves();
+				item.NewTurn();
 			}
+			
+			enemy.TakeTurn();
+		}
+		
+		public function EndEnemyTurn():void
+		{	
+			enemy.RestartUnits();
+			
+			turnNum++;
+			UpdateUI();
+			ToggleCinematic(false);
 		}
 		
 		

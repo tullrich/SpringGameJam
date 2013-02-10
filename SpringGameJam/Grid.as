@@ -102,6 +102,21 @@
 			return adjacent;
 		}
 		
+		public function GetFreeAdjacent(tile:Tile):Vector.<Tile>
+		{
+			var openAdjacent:Vector.<Tile> = new Vector.<Tile>();
+			
+			for each(var t:Tile in GetAdjacentTiles(tile))
+			{
+				if (t.IsOpen())
+				{
+					openAdjacent.push(t);
+				}
+			}
+			
+			return openAdjacent;
+		}
+		
 		public function GetActionOverlay():ActionOverlay
 		{
 			return _targeter;

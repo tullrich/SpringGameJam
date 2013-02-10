@@ -26,6 +26,12 @@
 			movementSpeed = 3;
 		}
 		
+		override public function init(e:Event):void
+		{
+			super.init(e);
+			_hp.color = (bPlayerControlled) ? 0x00FF00 : 0xFFFFFF;
+		}
+		
 		public function MoveTo(newTile:Tile, path:Vector.<Tile>):void
 		{
 			trace("moveto");
@@ -77,7 +83,7 @@
 			}
 			else
 			{
-				MarkDone();
+				EndTurn();
 				Game.GetInstance().ToggleCinematic(false);
 			}
 			
@@ -122,14 +128,20 @@
 			{
 				Victim.TakeDamage(1);
 				Victim =  null;
-				MarkDone();
+				EndTurn();
 			}
 		}
 		
-		public function MarkDone():void
+		public function EndTurn():void
 		{
 			bHasMoved = true;
 			disable();
+		}
+		
+		public function NewTurn():void
+		{
+			bHasMoved = false;
+			enable();
 		}
 		
 		public function HasAction():Boolean
