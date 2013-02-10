@@ -49,7 +49,7 @@
 		[Embed(source="/assets/Airplane.png")]
 		private static const BgAirplane:Class;
 		
-		[Embed(source="/assets/WaterBackground.png")]
+		[Embed(source="/assets/WaterBg2.png")]
 		private static const BgWater:Class;
 		
 		[Embed(source="/assets/Fire.xml",mimeType="application/octet-stream")]

@@ -18,6 +18,7 @@
 		var bHasMoved:Boolean;
 		var bHasAttacked:Boolean;
 		var _hp:TextField;
+		var awaitingInteract:Tile;
 		
 		var movementAnimation:String;
 		
@@ -25,6 +26,7 @@
 		{
 			super();
 			maxHealth = 50;
+			awaitingInteract = null;
 			currentHealth = 50;
 			hpString = "HP:" + currentHealth +"/"+ maxHealth;
 			movementSpeed = 3;
@@ -97,7 +99,26 @@
 		
 		public function MoveCompleted():void
 		{
+			
+			if(awaitingInteract != null)
+			{
+				LookTowards(awaitingInteract);
+				Interact(awaitingInteract);
+			}
+			
 			Game.GetInstance().ToggleCinematic(false);
+			awaitingInteract = null;
+		}
+		
+		override public function Interact(interact:Tile):void
+		{
+			
+		}
+		
+		public function MoveToAndInteract(interactTile:Tile, newTile:Tile, path:Vector.<Tile>):void
+		{
+			awaitingInteract = interactTile;
+			MoveTo(newTile, path);
 		}
 
 	}

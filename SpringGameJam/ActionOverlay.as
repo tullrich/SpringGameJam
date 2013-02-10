@@ -98,17 +98,20 @@
 						{
 							if(closedSet.indexOf(neighbor,0) == -1)
 							{
-								if(tempOpen.indexOf(neighbor,0) == -1)
+								if(neighbor.IsOpen())
 								{
-									if(neighbor.IsOpen())
+									if(tempOpen.indexOf(neighbor,0) == -1)
 									{
 										tempOpen.push(neighbor);
 										came_from[neighbor] = curTile;
 									}
-									else if (neighbor.IsInteractableBy(target))
+								}
+								else if (neighbor.IsInteractableBy(target))
+								{
+									if(interactable.indexOf(neighbor,0) == -1)
 									{
-										if(interactable.indexOf(neighbor,0) == -1)
-											interactable.push(neighbor);
+										interactable.push(neighbor);
+										came_from[neighbor] = curTile;
 									}
 								}
 							}
@@ -158,18 +161,14 @@
 			
 			if (reachable.indexOf(clicked) != -1)
 			{
-				
 				target.MoveTo(clicked, BuildPath(clicked));
-				HideOverlay();
 			}
 			else if(interactable.indexOf(clicked) != -1)
 			{
-				
+				target.MoveToAndInteract(clicked, came_from[clicked], BuildPath(came_from[clicked]));
 			}
-			else
-			{
-				HideOverlay();
-			}
+			
+			HideOverlay();
 		}
 
 	}
