@@ -76,7 +76,6 @@
 			
 			var index:int;
 			if (_targeter.interactable.length > 0)
-			//if( false)
 			{
 				index = Math.floor(Math.random() * _targeter.interactable.length);
 				Starling.juggler.delayCall(DelayedClick, 1, _targeter.interactable[index]);
