@@ -1,5 +1,7 @@
 ﻿package SpringGameJam {
 	
+	import starling.core.Starling;
+	
 	public class EnemyPlayer {
 		
 		var units:Vector.<Actor>;
@@ -76,17 +78,22 @@
 			//if( false)
 			{
 				index = Math.floor(Math.random() * _targeter.interactable.length);
-				_targeter.HandleClick(_targeter.interactable[index]);
+				Starling.juggler.delayCall(DelayedClick, 1, _targeter.interactable[index]);
 			}
 			if (_targeter.reachable.length > 0)
 			{
 				index = Math.floor(Math.random() * _targeter.reachable.length);
-				_targeter.HandleClick(_targeter.reachable[index]);
+				Starling.juggler.delayCall(DelayedClick, 1, _targeter.reachable[index]);
 			}
 			else
 			{
 				_targeter.HideOverlay();
 			}
+		}
+		
+		private function DelayedClick(t:Tile)
+		{
+			Game.GetInstance()._level._targeter.HandleClick(t);
 		}
 
 	}

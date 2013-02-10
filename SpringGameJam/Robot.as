@@ -11,7 +11,7 @@
 			bPlayerControlled = true;
 			AttackAnimation = "RobotAttack";
 			IdleAnimation = "RobotIdle";
-			WalkAnimation = "MechanicWalk";
+			WalkAnimation = "RobotWalk";
 		}
 		
 		override public function Interact(unit:Unit):void
