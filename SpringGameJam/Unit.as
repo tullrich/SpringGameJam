@@ -11,6 +11,8 @@
 	{
 		var moveDistance:int;
 		var _tile:Tile;
+		var tweenPath:Vector.<Tile>;
+		var model:MovieClip;
 		
 		public function Unit() 
 		{
@@ -23,12 +25,12 @@
 		
 		public function init(e:Event):void
 		{		
-			var _mc:MovieClip = new MovieClip(Assets.getTexturesFromAtlas("RobotIdle"), 4);
-			_mc.pivotX = _mc.x = _mc.height / 2;
-			_mc.pivotY = _mc.y = _mc.width / 2;
-			_mc.rotation = Math.PI + Math.PI / 2;
-			addChild(_mc);
-			Starling.juggler.add(_mc);
+			model = new MovieClip(Assets.getTexturesFromAtlas("RobotIdle"), 4);
+			model.pivotX = model.x = model.height / 2;
+			model.pivotY = model.y = model.width / 2;
+			model.rotation = Math.PI + Math.PI / 2;
+			addChild(model);
+			Starling.juggler.add(model);
 		}
 		
 		public function SetMove(m:int)
@@ -56,46 +58,64 @@
 				return;
 			}
 			
+			tweenPath = path;
 			Game.GetInstance().ToggleCinematic(true);
 			
-			var tween:Tween, prevTween:Tween;
-			var i:int = 0;
-			for each(var nextTile:Tile in path)
-			{
-				trace(i + ". " + nextTile);
-				i++;
-				
-				tween = new Tween(this, .5, Transitions.LINEAR);
-			 	tween.animate("x", nextTile.x);
-			  	tween.animate("y", nextTile.y);
-				
-				if(prevTween == null)
-				{
-					// first tween
-					Starling.juggler.add(tween);
-				}
-				else
-				{
-					// every other tween
-					prevTween.nextTween = tween;
-				}
-				
-				prevTween = tween;
-			}
-			
-			tween.onComplete = MoveCompleted;
-			  
 			if (_tile != null)
 			{
 				_tile.RemoveResident();
 			}
-			
 			newTile.SetResident(this);
+			
+			TickPath()
+		}
+		
+		public function TickPath()
+		{
+			if(tweenPath.length > 0)
+			{
+				var nextTile:Tile = tweenPath.shift();
+				var tween:Tween = new Tween(this, .5, Transitions.LINEAR);
+				tween.animate("x", nextTile.x);
+				tween.animate("y", nextTile.y);
+				tween.onComplete = TickPath;
+				Starling.juggler.add(tween);
+				
+				LookTowards(nextTile);
+			}
+			else
+			{
+				MoveCompleted();
+			}
 		}
 		
 		public function MoveCompleted():void
 		{
 			Game.GetInstance().ToggleCinematic(false);
+		}
+		
+		private function LookTowards(tile:Tile):void
+		{
+			if (x < tile.x)
+			{
+				// moving right
+				model.rotation = Math.PI / 2;
+			}
+			else if (x > tile.x)
+			{
+				// moving left
+				model.rotation = Math.PI + Math.PI / 2;
+			}
+			else if (y < tile.y)
+			{
+				// moving down
+				model.rotation = Math.PI;
+			}
+			else if (y > tile.y)
+			{
+				// moving up
+				model.rotation = 0;
+			}
 		}
 		
 		public function Place(newTile:Tile):void
