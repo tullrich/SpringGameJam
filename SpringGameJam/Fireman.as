@@ -5,14 +5,38 @@
 
 		public function Fireman() 
 		{
-			maxHealth = 50;
-			currentHealth = 50;
 			movementSpeed = 3;
-			damage = 10;
-			bHasMoved = false;
-			bHasAttacked = false;
-			IdleAnimation = "MechanicIdle";
+			IdleAnimation = "FiremanIdle";
+			AttackAnimation = "FiremanAttack";
 			movementAnimation = "";
+		}
+		
+		override public function Interact(interact:Tile):void
+		{
+			if (tile.HasRoom())
+			{
+				trace("Error: Interacting with an empty tile");
+				return;
+			}
+			
+			var unit:Unit = interact.resident;
+			
+			if(unit is Fire)
+			{
+				Attack(unit);
+			}
+		}
+		
+		override public function CanInteract(interact:Tile):Boolean
+		{
+			if (tile.HasRoom())
+			{
+				return false;
+			}
+			
+			var unit:Unit = interact.resident;
+			
+			return unit is Fire;
 		}
 
 	}

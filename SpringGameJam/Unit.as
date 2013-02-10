@@ -5,70 +5,102 @@
 	import starling.core.Starling;
 	import starling.display.MovieClip;
 	import starling.animation.Tween;
-	import starling.animation.Transitions;
+	import starling.animation.Transitions;;
+	import starling.utils.VAlign;
+	import starling.utils.HAlign;
+	import starling.text.TextField;
 	
 	public class Unit extends Sprite 
 	{
-		var moveDistance:int;
 		var _tile:Tile;
 		var tweenPath:Vector.<Tile>;
-		var model:MovieClip;
+		var _model:MovieClip;
 		var bIsInteractable:Boolean;
+		var currentHealth:int;
+		var _hp:TextField;
 		
+		var AttackAnimation:String;
 		var IdleAnimation:String;
 		
 		public function Unit() 
 		{
-			moveDistance = 7;
 			this.touchable = false;
 			addEventListener(Event.ADDED_TO_STAGE, init);
-			//this.pivotX = 32;
-			//this.pivotY = 32;
+			scaleX = 0.375;
+			scaleY = 0.375;
+			currentHealth = 5;
 		}
 		
 		public function init(e:Event):void
 		{		
-			model = new MovieClip(Assets.getTexturesFromAtlas(IdleAnimation), 4);
-			scaleX = 0.375;
-			scaleY = 0.375;
-			model.pivotX = model.x = (model.height) / 2;
-			model.pivotY = model.y = (model.width) / 2;
-			model.rotation = Math.PI + Math.PI / 2;
-			addChild(model);
-			Starling.juggler.add(model);
+			// character model 
+			_model = new MovieClip(Assets.getTexturesFromAtlas(IdleAnimation), 4);
+			_model.pivotX = _model.x = (_model.height) / 2;
+			_model.pivotY = _model.y = (_model.width) / 2;
+			_model.rotation = Math.PI + Math.PI / 2;
+			addChild(_model);
+			Starling.juggler.add(_model);
+
+			// health text
+			_hp = new TextField(64,64,"","Verdana",40,0xFFFFFF,true);
+			_hp.x = -10;
+			_hp.y = -10;
+			_hp.vAlign = VAlign.TOP;
+			_hp.hAlign = HAlign.LEFT;
+			_hp.text = "" + currentHealth;
+			addChild(_hp);
 		}
 		
-		public function SetMove(m:int)
+		public function PlayAnimation(anim:MovieClip):void
 		{
-			moveDistance = m;
+			Game.GetInstance().ToggleCinematic(true);
+			_model.visible = false;
+			_model.stop();
+			
+			anim.loop = false;
+			anim.addEventListener(Event.COMPLETE, AnimCompleted);
+			addChild(anim);
+			Starling.juggler.add(anim);
 		}
 		
-		public function GetMove():int
+		public function AnimCompleted(e:Event):void
 		{
-			return moveDistance;
+			MovieClip(e.target).removeEventListeners();
+			MovieClip(e.target).removeFromParent(true);
+			MovieClip(e.target).dispose();
+			trace("testtttt");
+			
+			_model.play();
+			_model.visible = true;
+			Game.GetInstance().ToggleCinematic(false);
 		}
 		
-		public function LookTowards(tile:Tile):void
+		public function LookTowards(tile:Tile, clip:MovieClip = null):void
 		{
+			if (clip == null)
+			{
+				clip = _model;
+			}
+			
 			if (x < tile.x)
 			{
 				// moving right
-				model.rotation = Math.PI / 2;
+				clip.rotation = Math.PI / 2;
 			}
 			else if (x > tile.x)
 			{
 				// moving left
-				model.rotation = Math.PI + Math.PI / 2;
+				clip.rotation = Math.PI + Math.PI / 2;
 			}
 			else if (y < tile.y)
 			{
 				// moving down
-				model.rotation = Math.PI;
+				clip.rotation = Math.PI;
 			}
 			else if (y > tile.y)
 			{
 				// moving up
-				model.rotation = 0;
+				clip.rotation = 0;
 			}
 		}
 		
@@ -99,6 +131,29 @@
 		public function set tile(newTile:Tile):void
 		{
 			_tile = newTile;
+		}
+		
+		public function TakeDamage(d:int)
+		{
+			currentHealth -= d;
+			if(currentHealth >= 0)
+			{
+				_hp.text = "" + currentHealth;
+			}
+			else
+			{
+				
+			}
+		}
+		
+		public function Attack(u:Unit):void
+		{
+			var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas(AttackAnimation), 4);
+			anim.pivotX = anim.x = (anim.height) / 2;
+			anim.pivotY = anim.y = (anim.width) / 2;
+			LookTowards(u._tile, anim);
+			PlayAnimation(anim);
+			u.TakeDamage(1);
 		}
 
 	}

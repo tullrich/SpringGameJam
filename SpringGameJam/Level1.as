@@ -44,7 +44,8 @@
 		
 		static var Units:Array = [
 								  {"class":Fire, "x":10, "y":15 }, 
-								  {"class":Robot, "x":10, "y":16 }
+								  {"class":Robot, "x":10, "y":16 }, 
+								  {"class":Fireman, "x":10, "y":14 }
 								  ];
 	}
 	

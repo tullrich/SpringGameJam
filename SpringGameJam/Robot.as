@@ -7,12 +7,19 @@
 		public function Robot() {
 			super();
 			
-			maxHealth = 10;
-			currentHealth = 10;
 			movementSpeed = 2;
-			damage = 10;
 			IdleAnimation = "RobotIdle";
 			movementAnimation = "";
+		}
+		
+		override public function Interact(interact:Tile):void
+		{
+			
+		}
+		
+		override public function CanInteract(interact:Tile):Boolean
+		{
+			return false;
 		}
 
 	}

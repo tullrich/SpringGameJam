@@ -1,23 +1,17 @@
 ﻿package SpringGameJam 
 {
-	import starling.text.TextField;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.core.Starling;
 	import starling.display.MovieClip;
 	import starling.animation.Tween;
-	import starling.animation.Transitions;
+	import starling.animation.Transitions
 	
 	public class Actor extends Unit
 	{
-		var currentHealth:int;
-		var maxHealth:int;
-		var hpString:String;
 		var movementSpeed:int;
-		var damage:int;
 		var bHasMoved:Boolean;
 		var bHasAttacked:Boolean;
-		var _hp:TextField;
 		var awaitingInteract:Tile;
 		
 		var movementAnimation:String;
@@ -25,35 +19,8 @@
 		public function Actor() 
 		{
 			super();
-			maxHealth = 50;
 			awaitingInteract = null;
-			currentHealth = 50;
-			hpString = "HP:" + currentHealth +"/"+ maxHealth;
 			movementSpeed = 3;
-			damage = 10;
-			bHasMoved = false;
-			bHasAttacked = false;
-			_hp = new TextField(64,16,"","Verdana",12,0x000000,false);
-		}
-		
-		override public function init(e:Event):void
-		{	 
-			super.init(e);
-			_hp.text = hpString;
-			addChild(_hp);
-		}
-		
-		public function takeDamage(d:int)
-		{
-			currentHealth -= d;
-			if(currentHealth >= 0)
-			{
-				_hp.text = currentHealth +"/"+ maxHealth;
-			}
-			else
-			{
-				
-			}
 		}
 		
 		public function MoveTo(newTile:Tile, path:Vector.<Tile>):void
@@ -105,14 +72,12 @@
 				LookTowards(awaitingInteract);
 				Interact(awaitingInteract);
 			}
+			else
+			{
+				Game.GetInstance().ToggleCinematic(false);
+			}
 			
-			Game.GetInstance().ToggleCinematic(false);
 			awaitingInteract = null;
-		}
-		
-		override public function Interact(interact:Tile):void
-		{
-			
 		}
 		
 		public function MoveToAndInteract(interactTile:Tile, newTile:Tile, path:Vector.<Tile>):void
@@ -125,6 +90,16 @@
 		{
 			bHasMoved = false;
 			bHasAttacked = false;
+		}
+		
+		public function Interact(interact:Tile):void
+		{
+			
+		}
+		
+		public function CanInteract(interact:Tile):Boolean
+		{
+			return false;
 		}
 
 	}

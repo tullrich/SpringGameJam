@@ -64,6 +64,20 @@
 		[Embed(source="/assets/Fire.png")]
 		private static const FireAtlas:Class;
 		
+		[Embed(source="/assets/CloudScroll.png")]
+		private static const Clouds:Class;
+		
+		[Embed(source="/assets/FiremanIdle.xml",mimeType="application/octet-stream")]
+		private static const FiremanIdleXML:Class;
+		
+		[Embed(source="/assets/FiremanIdle.png")]
+		private static const FiremanIdleAtlas:Class;
+		
+		[Embed(source="/assets/FiremanAttack.xml",mimeType="application/octet-stream")]
+		private static const FiremanAttackXML:Class;
+		
+		[Embed(source="/assets/FiremanAttack.png")]
+		private static const FiremanAttackAtlas:Class;
 		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();

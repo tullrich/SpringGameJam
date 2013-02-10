@@ -72,7 +72,7 @@
 		private function ComputePaths():void
 		{
 			var currentTile:Tile;
-			var unitMove = target.GetMove();
+			var unitMove = target.movementSpeed;
 			var depth:int = 0;
 			var closedSet:Vector.<Tile> = new Vector.<Tile>();
 			var openSet:Vector.<Tile> = new Vector.<Tile>();
@@ -106,7 +106,7 @@
 										came_from[neighbor] = curTile;
 									}
 								}
-								else if (neighbor.IsInteractableBy(target))
+								else if (target.CanInteract(neighbor))
 								{
 									if(interactable.indexOf(neighbor,0) == -1)
 									{

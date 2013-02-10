@@ -99,11 +99,6 @@
         {
             return "(" + xindex + ", " + yindex + ")";
         }
-		
-		public function IsInteractableBy(u:Unit):Boolean
-		{
-			return (resident != null && resident.bIsInteractable);
-		}
 
 	}
 	
