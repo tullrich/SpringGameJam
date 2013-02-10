@@ -41,7 +41,6 @@
 			if (tempEnemies.length > 0)
 			{
 				var u:Actor = tempEnemies.pop();
-				trace("Currently using :" + u);
 				if(u is Fire && !u.bHasAttacked)
 				{
 					Fire(u).TryToSpread();

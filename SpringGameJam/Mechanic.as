@@ -1,6 +1,6 @@
 ﻿package SpringGameJam {
 	
-	public class Mechanic extends Actor {
+	public class Mechanic extends Robot {
 
 		public function Mechanic() {
 			
