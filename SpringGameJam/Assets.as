@@ -43,6 +43,12 @@
 		[Embed(source="/assets/overlay_move.png")]
 		private static const OverlayMove:Class;
 		
+		[Embed(source="/assets/overlay_move.png")]
+		private static const NextTurnButtonUp:Class;
+		
+		[Embed(source="/assets/overlay_interact.png")]
+		private static const NextTurnButtonDown:Class;
+		
 		[Embed(source="/assets/overlay_interact.png")]
 		private static const OverlayInteract:Class;
 		

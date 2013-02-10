@@ -120,6 +120,12 @@
 			awaitingInteract = interactTile;
 			MoveTo(newTile, path);
 		}
+		
+		public function ResetMoves()
+		{
+			bHasMoved = false;
+			bHasAttacked = false;
+		}
 
 	}
 	

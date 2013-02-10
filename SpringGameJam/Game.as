@@ -8,6 +8,7 @@
 	import starling.events.Event;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.display.Button;
 	
 	public class Game extends Sprite {
 		
@@ -15,8 +16,9 @@
 		var _level:Grid;
 		var _interceptor:Sprite;
 		var bIntercepting;
+		var AllUnits:Vector.<Actor>
 		
-		var units:Vector.<Unit>;
+		var actors:Vector.<Unit>;
 
 		public function Game() 
 		{
@@ -42,6 +44,10 @@
 		{
 			var u:Unit = new unitClass();
 			_level.AddUnit(u, x, y);
+			if(u is Actor)
+			{
+				actors.push(u);
+			}
 		}
 		
 		private function CreateLevel():void
@@ -62,6 +68,9 @@
 			_interceptor.width = width;
         	_interceptor.addEventListener(TouchEvent.TOUCH, InterceptorClicked);
 			_interceptor.addChild( new Image(Assets.getTexture("Interceptor")) );
+			
+			var _NextTurn:Button = new Button(NextTurnButtonUp,"NextTurn",NextTurnButtonDown);
+			_NextTurn.addEventListener(TouchEvent.TOUCH, NextTurn);
 		}
 		
 		private function InterceptorClicked(e:TouchEvent)
@@ -96,6 +105,15 @@
 				removeChild(_interceptor);
 			}
 		}
+		
+		public function NextTurn()
+		{
+			for each(var item:Actor in actors)
+			{
+				item.ResetMoves();
+			}
+		}
+		
 		
 	}
 	
