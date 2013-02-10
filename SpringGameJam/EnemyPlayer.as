@@ -3,6 +3,7 @@
 	public class EnemyPlayer {
 		
 		var units:Vector.<Actor>;
+		var tempEnemies:Vector.<Actor>;
 
 		public function EnemyPlayer() 
 		{
@@ -29,10 +30,11 @@
 		public function TakeTurn()
 		{
 			trace("enemy turn");
+			tempEnemies = units.slice();
 			
-			for each(var u:Actor in units)
+			for each(var u:Actor in tempEnemies)
 			{
-				if(u is Fire)
+				if(u is Fire && !u.bHasAttacked)
 				{
 					Fire(u).TryToSpread();
 				}

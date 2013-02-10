@@ -8,19 +8,29 @@
 			
 			movementSpeed = 2;
 			IdleAnimation = "Fire";
+			AttackAnimation = "Fire";
 		}
 		
 		public function TryToSpread()
 		{
 			trace("trying to spread");
 			
-			var chance:int = Math.floor(Math.random() * 2);
+			var chance:int;
 			
-			if (chance)
+			for each(var a:Tile in Game.GetInstance()._level.GetAdjacentTiles(_tile))
 			{
-				for each(var t:Tile in Game.GetInstance()._level.GetFreeAdjacent(_tile))
+				if(!a.IsOpen() && a.bIsActive && !(a.resident is Fire))
 				{
-					 Game.GetInstance().CreateUnitAt(Fire, t.xindex, t.yindex);
+					Attack(a.resident);
+				}
+			}
+			
+			for each(var t:Tile in Game.GetInstance()._level.GetFreeAdjacent(_tile))
+			{
+				chance = Math.floor(Math.random() * 2);
+				if(chance)
+				{
+					Game.GetInstance().CreateUnitAt(Fire, t.xindex, t.yindex);
 					trace("spreading");
 				}
 			}

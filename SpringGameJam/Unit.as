@@ -188,6 +188,7 @@
 		{
 			_model.filter = null;
 		}
+		
 
 	}
 	

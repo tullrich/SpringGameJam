@@ -21,16 +21,18 @@
 		var _level:Grid;
 		var _interceptor:Sprite;
 		var bIntercepting;
-		var AllUnits:Vector.<Actor>
+		var systemUnits:Vector.<SystemUnit>
 		var enemy:EnemyPlayer;
 		var playersUnits:Vector.<Actor>;
-		var _TurnCount:TextField, _announceText:TextField;
+		var _TurnCount:TextField, _announceText:TextField, _AltitudeText:TextField;
 		var turnNum:uint;
+		var altitude:int;
 
 		public function Game() 
 		{
 			_instance = this;
 			turnNum = 1;
+			altitude = 33000;
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -45,10 +47,11 @@
 		
 		private function StartGame()
 		{
+			
 		}
 		
 		
-		public function CreateUnitAt(unitClass:Class, x:uint, y:uint):void
+		public function CreateUnitAt(unitClass:Class, x:uint, y:uint):Unit
 		{
 			var u:Unit = new unitClass();
 			
@@ -60,8 +63,13 @@
 			{
 				enemy.ControlUnit(Actor(u));
 			}
+			else if(u is SystemUnit)
+			{
+				systemUnits.push(u);
+			}
 			
 			_level.AddUnit(u, x, y);
+			return u;
 		}
 		
 		private function CreateBackground():void
@@ -117,6 +125,8 @@
 			enemy = new EnemyPlayer();
 			_level.init();
 			
+			systemUnits = new Vector.<SystemUnit>
+			
 			for each (var u:Object in Level1.Units)
 			{
 				CreateUnitAt(u["class"], u["x"], u["y"]);
@@ -135,6 +145,12 @@
 			_announceText.visible = false;
 			_announceText.alpha = 0;
 			addChild(_announceText);
+			
+			_AltitudeText = new TextField(1024,64,"","Verdana",32,0xFFFFFF,true);
+			_AltitudeText.x = -256;
+			_AltitudeText.y = 0
+			_AltitudeText.text = altitude.toString();
+			addChild(_AltitudeText);
 			
 			_TurnCount = new TextField(256,64,"","Verdana",40,0xFFFFFF,true);
 			_TurnCount.underline = true;
@@ -242,7 +258,31 @@
 			
 			turnNum++;
 			UpdateUI();
+			UpdateAltitude();
 			BeginPlayerTurn();
+		}
+		
+		public function UpdateAltitude()
+		{
+			for each (var u:SystemUnit in systemUnits)
+			{
+				if(u.bIsSpecial == true && u.currentHealth > 0 && altitude < 33000)
+					altitude += 1000;
+				if(u.currentHealth == 0)
+					altitude -= 1000;
+			}
+			
+			_AltitudeText.text = altitude.toString();
+			
+			if(altitude <= 0)
+			{
+				GameOver();
+			}
+		}
+		
+		public function GameOver()
+		{
+			
 		}
 		
 		
