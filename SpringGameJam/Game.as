@@ -322,6 +322,36 @@
 			
 		}
 		
+		public function SpawnRandom(c:Class, count:int = 1, spawnDisabled:Boolean = false)
+		{
+			for (var i:int = 0; i < count; i++)
+			{
+				var failsafe = 0;
+				var goodLocation:Boolean = false;
+				do
+				{
+					var randX:int = Math.floor(Math.random() * 21);
+					var randY:int = Math.floor(Math.random() * 16);
+					if(_level.Map[randX][randY].IsOpen())
+					{
+						goodLocation = true;
+					}
+					else
+					{
+						failsafe++
+						if (failsafe > 20)
+						{
+							trace("failed to spawn " + c);
+							return;
+						}
+					}
+				}
+				while(!goodLocation)
+				
+				var u:Unit = CreateUnitAt(c,randX,randY);
+				Actor(u).EndTurn();
+			}
+		}
 		
 	}
 	
