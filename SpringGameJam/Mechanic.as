@@ -35,7 +35,7 @@
 				return true;
 			}
 			
-			return (unit is SystemUnit || unit is Robot) && unit.currentHealth < 5;
+			return (unit is SystemUnit || unit is Robot) && unit.currentHealth < unit.maxHealth;
 		}
 
 	}

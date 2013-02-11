@@ -43,7 +43,7 @@
 		[Embed(source="/assets/MechanicWalk.png")]
 		private static const MechanicWalkAtlas:Class;
 		
-		[Embed(source="/assets/tile.png")]
+		[Embed(source="/assets/metal_tiles2.png")]
 		private static const TileBorder:Class;
 		
 		[Embed(source="/assets/tile_inner.png")]
