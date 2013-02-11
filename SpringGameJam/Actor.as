@@ -21,9 +21,14 @@
 		var WalkAnimation:String;
 		var WalkClip:MovieClip;
 		
+		var power:int;
+		var healpower:int;
+		
 		public function Actor() 
 		{
 			super();
+			power = 1;
+			healpower = 0;
 			awaitingInteract = null;
 			movementSpeed = 3;
 		}
@@ -138,7 +143,7 @@
 			
 			if( Victim != null)
 			{
-				Victim.TakeDamage(1);
+				Victim.TakeDamage(power);
 				if(Victim is SystemUnit)
 				{
 					bIsSafe = true;
@@ -196,6 +201,28 @@
 			{
 				Game.GetInstance().RemoveUnit(this);
 			}
+		}
+		
+		public function Heal(u:Unit):void
+		{
+			var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas(AttackAnimation), 4);
+			anim.pivotX = anim.x = (anim.height) / 2;
+			anim.pivotY = anim.y = (anim.width) / 2;
+			Victim = u;
+			PlayAnimation(anim, HealComplete);
+			LookTowards(u._tile);
+		}
+		
+		public function HealComplete():void
+		{	
+			if( Victim != null)
+			{
+				Victim.GainHealth(healpower);
+				Victim =  null;
+				EndTurn();
+			}
+			
+			Game.GetInstance().ToggleCinematic(false);
 		}
 
 	}

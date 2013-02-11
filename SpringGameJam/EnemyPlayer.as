@@ -48,7 +48,8 @@
 				}
 				while(!goodLocation)
 				
-				Game.GetInstance().CreateUnitAt(Snake,randX,randY);
+				var u:Unit = Game.GetInstance().CreateUnitAt(Snake,randX,randY);
+				Actor(u).EndTurn();
 			}
 			
 			NextAction();

@@ -47,7 +47,7 @@
 			Starling.juggler.add(_model);
 
 			// health text
-			_hp = new TextField(64,64,"","Verdana",40,0xB4B4B4,true);
+			_hp = new TextField(64,64,"","Verdana",40,0x000000,true);
 			_hp.x = -10;
 			_hp.y = -10;
 			_hp.vAlign = VAlign.TOP;
