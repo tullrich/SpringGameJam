@@ -20,7 +20,7 @@
 		static var _instance:Game;
 		var _level:Grid;
 		var _interceptor:Sprite;
-		var _AltitudeImage:Image;
+		var _AltitudeImage:Image, _NextButton:Image;
 		var _AltitudeCriticalImage:Image;
 		var bIntercepting;
 		var systemUnits:Vector.<SystemUnit>
@@ -135,6 +135,13 @@
 			_AltitudeImage.x = 0;
 			_AltitudeImage.y = 0;
 			addChild(_AltitudeImage);
+			
+			_NextButton = new Image(Assets.getTexture("NextTurnButtonDown"));
+			_NextButton.x = 1024 - 180;
+			_NextButton.y = 800 - 85.5;
+			_NextButton.scaleX = _NextButton.scaleY = 0.75;
+			_NextButton.alpha = 0;
+			addChild(_NextButton);
 		}
 		
 		private function CreateGameField():void
@@ -397,6 +404,24 @@
 				_AltitudeImage.visible = true;
 				_AltitudeCriticalImage.visible = false;
 			}
+		}
+		
+		public function CheckPlayerDone():Boolean
+		{
+			for each(var playersUnit:Actor in playersUnits)
+			{
+				if(playersUnit.HasAction())
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		public function FlashButton()
+		{
+			trace("Out of Moves");
+			_NextButton.alpha = 100;
 		}
 		
 	}

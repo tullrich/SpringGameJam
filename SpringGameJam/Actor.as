@@ -150,6 +150,13 @@
 		public function EndTurn():void
 		{
 			bHasMoved = true;
+			if(Game.GetInstance().playersUnits.indexOf(this) != -1)
+			{
+				if(Game.GetInstance().CheckPlayerDone())
+				{
+					Game.GetInstance().FlashButton();
+				}
+			}
 			disable();
 		}
 		
