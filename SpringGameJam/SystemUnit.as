@@ -31,7 +31,7 @@
 			Starling.juggler.add(_model);
 
 			// health text
-			_hp = new TextField(64,64,"","Verdana",40,0xFFFFFF,true);
+			_hp = new TextField(64,64,"","Verdana",40,0xB4B4B4,true);
 			_hp.x = -10;
 			_hp.y = -10;
 			_hp.vAlign = VAlign.TOP;
@@ -57,6 +57,7 @@
 			if (currentHealth == 0 && _animClip == null)
 			{
 				// we are not in the 0 health animation
+				_hp.visible = false;
 				var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas("ConsoleBroken"), 4);
 				anim.pivotX = anim.x = (anim.height) / 2;
 				anim.pivotY = anim.y = (anim.width) / 2;
@@ -70,6 +71,7 @@
 			
 			if(currentHealth > 0 && _animClip != null)
 			{
+				_hp.visible = true;
 				_animClip.dispatchEventWith("AnimationReturn");
 			}
 		}
