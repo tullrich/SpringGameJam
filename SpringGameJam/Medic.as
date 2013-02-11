@@ -32,7 +32,7 @@
 			{
 				return false;
 			}
-			return unit is Actor && Actor(unit).bPlayerControlled && unit.currentHealth < 5;
+			return unit is Actor && Actor(unit).bPlayerControlled && unit.currentHealth < unit.maxHealth;
 		}
 
 	}

@@ -18,6 +18,7 @@
 		var _model:MovieClip;
 		var _animClip:MovieClip;
 		var currentHealth:int;
+		var maxHealth:int;
 		var _hp:TextField;
 		var AnimCallback:Function;
 		
@@ -32,6 +33,7 @@
 			addEventListener(Event.ADDED_TO_STAGE, init);
 			scaleX = 0.75;
 			scaleY = 0.75;
+			maxHealth = 5;
 			currentHealth = 5;
 		}
 		
@@ -181,11 +183,11 @@
 		
 		public function GainHealth(h:int)
 		{
-			if (currentHealth < 5)
+			if (currentHealth < maxHealth)
 			{
-				if( currentHealth + h > 5)
+				if( currentHealth + h > maxHealth)
 				{
-					currentHealth = 5;
+					currentHealth = maxHealth
 				}
 				else
 				{
