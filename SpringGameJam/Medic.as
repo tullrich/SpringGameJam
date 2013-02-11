@@ -28,10 +28,10 @@
 		
 		override public function CanInteract(unit:Unit):Boolean
 		{
-			if (unit == this)
+/*			if (unit == this)
 			{
 				return false;
-			}
+			}*/
 			return unit is Actor && Actor(unit).bPlayerControlled && unit.currentHealth < unit.maxHealth;
 		}
 

@@ -106,6 +106,9 @@
 		public function MoveToAndInteract(interactTile:Tile, newTile:Tile, path:Vector.<Tile>):void
 		{
 			awaitingInteract = interactTile;
+			trace("interactTile " + interactTile);
+			trace("mytile " + _tile);
+			trace("path " + path);
 			MoveTo(newTile, path);
 		}
 		

@@ -68,14 +68,17 @@
 				addChildAt(_mc2, 0);
 			}
 			
-			// add the orange overlay under the picked unit
-			var _mc3:Image = new Image(Assets.getTexture("OverlayTarget"));
-			_mc3.touchable = false;
-			_mc3.scaleX = 0.75;
-			_mc3.scaleY = 0.75;
-			_mc3.x = originTile.x;
-			_mc3.y = originTile.y;
-			addChildAt(_mc3, 0);
+			// add the orange overlay under the picked unit only if we cant interact with outself
+			if (interactable.indexOf(originTile) == -1)
+			{
+				var _mc3:Image = new Image(Assets.getTexture("OverlayTarget"));
+				_mc3.touchable = false;
+				_mc3.scaleX = 0.75;
+				_mc3.scaleY = 0.75;
+				_mc3.x = originTile.x;
+				_mc3.y = originTile.y;
+				addChildAt(_mc3, 0);
+			}
 			 
 		}
 		
@@ -88,6 +91,14 @@
 			var openSet:Vector.<Tile> = new Vector.<Tile>();
 			openSet.push(target.tile);
 			var neighboringTiles:Vector.<Tile> = new Vector.<Tile>();
+			
+			
+			// special check for self interaction
+			if(target.CanInteract(target))
+			{
+				interactable.push(originTile);
+				came_from[originTile] = originTile;
+			}
 
 			while(openSet.length > 0)
 			{
