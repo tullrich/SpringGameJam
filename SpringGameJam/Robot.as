@@ -7,7 +7,7 @@
 		public function Robot() {
 			super();
 			
-			movementSpeed = 2;
+			movementSpeed = 4;
 			bPlayerControlled = true;
 			AttackAnimation = "RobotAttack";
 			IdleAnimation = "RobotIdle";
@@ -22,16 +22,20 @@
 				return;
 			}
 			
-			if(unit is Snake)
+			if(unit is Snake || unit is Fire)
 			{
 				Attack(unit);
+			}
+			else if (unit is SystemUnit)
+			{
+				Heal(unit);
 			}
 			
 		}
 		
 		override public function CanInteract(unit:Unit):Boolean
 		{
-			return unit is Snake;
+			return unit is Snake || unit is Fire || (unit is SystemUnit && unit.currentHealth < unit.maxHealth);
 		}
 
 	}

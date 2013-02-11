@@ -28,7 +28,7 @@
 		{
 			super();
 			power = 1;
-			healpower = 0;
+			healpower = 1;
 			awaitingInteract = null;
 			movementSpeed = 3;
 		}
