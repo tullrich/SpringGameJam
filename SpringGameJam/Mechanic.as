@@ -7,7 +7,7 @@
 			movementSpeed = 4;
 			bPlayerControlled = true;
 			IdleAnimation = "MechanicIdle";
-			AttackAnimation = "FiremanAttack";
+			AttackAnimation = "MechanicAttack";
 			WalkAnimation = "MechanicWalk";
 		}
 

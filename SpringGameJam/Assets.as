@@ -151,6 +151,18 @@
 		[Embed(source="/assets/SamWalk.png")]
 		private static const SamWalkAtlas:Class;
 		
+		[Embed(source="/assets/MechanicAttack.xml",mimeType="application/octet-stream")]
+		private static const MechanicAttackXML:Class;
+		
+		[Embed(source="/assets/MechanicAttack.png")]
+		private static const MechanicAttackAtlas:Class;
+		
+		[Embed(source="/assets/FiremanWalk.xml",mimeType="application/octet-stream")]
+		private static const FiremanWalkXML:Class;
+		
+		[Embed(source="/assets/FiremanWalk.png")]
+		private static const FiremanWalkAtlas:Class;
+		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
 		private static var _atlasAssets:Dictionary = new Dictionary();
