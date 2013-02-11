@@ -9,7 +9,7 @@
 			bPlayerControlled = true;
 			IdleAnimation = "FiremanIdle";
 			AttackAnimation = "FiremanAttack";
-			WalkAnimation = "MedicWalk";
+			WalkAnimation = "FiremanWalk";
 		}
 		
 		override public function Interact(unit:Unit):void
@@ -22,13 +22,19 @@
 			
 			if(unit is Fire)
 			{
+				power = 2;
+				Attack(unit);
+			}
+			else
+			{
+				power = 1;
 				Attack(unit);
 			}
 		}
 		
 		override public function CanInteract(unit:Unit):Boolean
 		{
-			return unit is Fire;
+			return unit is Fire || unit is Snake;
 		}
 
 	}

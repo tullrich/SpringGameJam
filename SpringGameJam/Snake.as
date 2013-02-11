@@ -30,7 +30,7 @@
 			{
 				return true;
 			}
-			else if (unit is SystemUnit)
+			else if (unit is SystemUnit && unit.currentHealth > 0)
 			{
 				return true;
 			}

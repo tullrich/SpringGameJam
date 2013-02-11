@@ -7,6 +7,7 @@
 		public function Medic() {
 			
 			movementSpeed = 5;
+			healpower = 2;
 			bPlayerControlled = true;
 			IdleAnimation = "MedicIdle";
 			AttackAnimation = "MedicAttack";
@@ -22,37 +23,16 @@
 				return;
 			}
 			
-			if(unit is Actor)
-			{
-				Heal(unit);
-			}
+			Heal(unit);
 		}
 		
 		override public function CanInteract(unit:Unit):Boolean
 		{
-			return unit is Actor && Actor(unit).bPlayerControlled && unit.currentHealth < 5;
-		}
-		
-		public function Heal(u:Unit):void
-		{
-			var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas(AttackAnimation), 4);
-			anim.pivotX = anim.x = (anim.height) / 2;
-			anim.pivotY = anim.y = (anim.width) / 2;
-			Victim = u;
-			PlayAnimation(anim, HealComplete);
-			LookTowards(u._tile);
-		}
-		
-		public function HealComplete():void
-		{	
-			if( Victim != null)
+			if (unit == this)
 			{
-				Victim.GainHealth(1);
-				Victim =  null;
-				EndTurn();
+				return false;
 			}
-			
-			Game.GetInstance().ToggleCinematic(false);
+			return unit is Actor && Actor(unit).bPlayerControlled && unit.currentHealth < 5;
 		}
 
 	}

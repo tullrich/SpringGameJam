@@ -47,7 +47,7 @@
 			Starling.juggler.add(_model);
 
 			// health text
-			_hp = new TextField(64,64,"","Verdana",40,0xFFFFFF,true);
+			_hp = new TextField(64,64,"","Verdana",40,0xB4B4B4,true);
 			_hp.x = -10;
 			_hp.y = -10;
 			_hp.vAlign = VAlign.TOP;
@@ -165,14 +165,17 @@
 		
 		public function TakeDamage(d:int)
 		{
-			currentHealth -= d;
-			if(currentHealth >= 0)
+			if(currentHealth > 0)
 			{
+				if (currentHealth - d < 0)
+				{
+					currentHealth = 0;
+				}
+				else
+				{
+					currentHealth -= d;
+				}
 				_hp.text = "" + currentHealth;
-			}
-			else
-			{
-				
 			}
 		}
 		
@@ -180,7 +183,14 @@
 		{
 			if (currentHealth < 5)
 			{
-				currentHealth++;
+				if( currentHealth + h > 5)
+				{
+					currentHealth = 5;
+				}
+				else
+				{
+					currentHealth += h;
+				}
 				_hp.text = "" + currentHealth;
 			}
 		}
