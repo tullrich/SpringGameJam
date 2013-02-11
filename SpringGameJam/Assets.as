@@ -169,6 +169,21 @@
 		[Embed(source="/assets/FiremanWalk.png")]
 		private static const FiremanWalkAtlas:Class;
 		
+		[Embed(source="/assets/TitleScreen.png")]
+		private static const TitleScreen:Class;
+		
+		[Embed(source="/assets/HelpScreen.png")]
+		private static const HelpScreen:Class;
+		
+		[Embed(source="/assets/AirplaneTop.png")]
+		private static const AirplaneTop:Class;
+		
+		[Embed(source="/assets/BurningPlane.xml",mimeType="application/octet-stream")]
+		private static const BurningPlaneXML:Class;
+		
+		[Embed(source="/assets/BurningPlane.png")]
+		private static const BurningPlaneAtlas:Class;
+		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
 		private static var _atlasAssets:Dictionary = new Dictionary();

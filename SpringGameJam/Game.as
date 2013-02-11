@@ -1,8 +1,6 @@
 ﻿package SpringGameJam {
 	
 	import starling.display.Sprite;
-	import SpringGameJam.Robot;
-	import SpringGameJam.Level1;
 	import starling.display.Image;
 	import starling.events.Touch;
 	import starling.events.Event;
@@ -314,7 +312,7 @@
 			
 			_AltitudeText.text = altitude.toString();
 			
-			if(altitude <= 0)
+			if(altitude <= 0 || playersUnits.length <= 0)
 			{
 				GameOver();
 			}
@@ -322,7 +320,7 @@
 		
 		public function GameOver()
 		{
-			
+			Intro._instance.GameOver(turnNum);
 		}
 		
 		public function SpawnRandom(c:Class, count:int = 1, spawnDisabled:Boolean = false)

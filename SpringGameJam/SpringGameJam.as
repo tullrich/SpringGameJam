@@ -19,7 +19,7 @@
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			//Starling.handleLostContext = true;
 			
-			myStarling = new Starling(Game, stage);
+			myStarling = new Starling(Intro, stage);
 			myStarling.start();
 			
 		}
