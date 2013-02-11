@@ -81,32 +81,61 @@
 			return newtile;
 		}
 		
-		public function GetAdjacentTiles(tile:Tile):Vector.<Tile>
+		public function GetAdjacentTiles(tile:Tile, includeDiagonal:Boolean = false):Vector.<Tile>
 		{
 			var adjacent:Vector.<Tile> = new Vector.<Tile>();
 			
+			var leftOk = tile.xindex - 1 >= 0;
+			var rightOk = tile.xindex + 1 < xTiles;
+			var downOk = tile.yindex + 1 < yTiles;
+			var upOk = tile.yindex - 1 >= 0;
+			
 			// right side 
-			if (tile.xindex + 1 < xTiles)
+			if (rightOk)
 			{
 				adjacent.push(Map[tile.xindex + 1][tile.yindex]);
 			}
 			
 			// left side
-			if (tile.xindex - 1 >= 0)
+			if (leftOk)
 			{
 				adjacent.push(Map[tile.xindex - 1][tile.yindex]);
 			}
 						
 			// bottom side 
-			if (tile.yindex + 1 < yTiles)
+			if (downOk)
 			{
 				adjacent.push(Map[tile.xindex][tile.yindex + 1]);
 			}
 			
 			// top side
-			if (tile.yindex - 1 >= 0)
+			if (upOk)
 			{
 				adjacent.push(Map[tile.xindex][tile.yindex - 1]);
+			}
+			
+			if (includeDiagonal)
+			{
+				// top left
+				if (upOk && leftOk)
+				{
+					adjacent.push(Map[tile.xindex - 1][tile.yindex - 1]);
+				}
+				// bottom left
+				if (downOk && leftOk)
+				{
+					adjacent.push(Map[tile.xindex + 1][tile.yindex - 1]);
+				}
+				// top right
+				if (upOk && rightOk)
+				{
+					adjacent.push(Map[tile.xindex - 1][tile.yindex + 1]);
+				}
+				// bottom right
+				if (downOk && rightOk)
+				{
+					adjacent.push(Map[tile.xindex + 1][tile.yindex + 1]);
+				}
 			}
 			
 			return adjacent;

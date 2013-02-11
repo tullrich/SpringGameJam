@@ -36,6 +36,28 @@
 		{
 			return unit is Fire || unit is Snake;
 		}
+		
+		override public function AttackComplete():void
+		{	
+			for each(var a:Tile in Game.GetInstance()._level.GetAdjacentTiles(_tile, true))
+			{
+				if(!a.IsOpen() && a.bIsActive)
+				{
+					if(a.resident is Fire)
+					{
+						a.resident.TakeDamage(power);
+					}
+				}
+			}
+			
+			if( Victim != null)
+			{
+				Victim = null;
+				EndTurn();
+			}
+			
+			Game.GetInstance().ToggleCinematic(false);
+		}
 
 	}
 	
