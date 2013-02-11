@@ -128,13 +128,12 @@
 			_AltitudeCriticalImage = new Image(Assets.getTexture("ElevationBarCritical"));
 			_AltitudeCriticalImage.x = 0;
 			_AltitudeCriticalImage.y = 0;
-			_AltitudeCriticalImage.alpha = 0;
+			_AltitudeCriticalImage.visible = false;
 			addChild(_AltitudeCriticalImage);
 			
 			_AltitudeImage = new Image(Assets.getTexture("ElevationBar"));
 			_AltitudeImage.x = 0;
 			_AltitudeImage.y = 0;
-			_AltitudeImage.alpha = 100;
 			addChild(_AltitudeImage);
 		}
 		
