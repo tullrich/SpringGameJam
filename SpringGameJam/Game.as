@@ -154,10 +154,29 @@
 			
 			systemUnits = new Vector.<SystemUnit>
 			
-			for each (var u:Object in Level1.Units)
+			for(var x:int = 0; x < 5; x++)
 			{
-				//CreateUnitAt(u["class"], u["x"], u["y"]);
-				SpawnRandom(u["class"]);
+				var spawnType:int = Math.floor(Math.random() * 5);
+				if(spawnType == 0)
+				{
+					SpawnRandom(Fireman,1,false);
+				}
+				else if(spawnType == 1)
+				{
+					SpawnRandom(Medic,1,false);
+				}
+				else if(spawnType == 2)
+				{
+					SpawnRandom(MaceWindu,1,false);
+				}
+				else if(spawnType == 3)
+				{
+					SpawnRandom(Mechanic,1,false);
+				}
+				else
+				{
+					SpawnRandom(Robot,1,false);
+				}
 			}
 			
 			SpawnRandom(Fire, 5);
