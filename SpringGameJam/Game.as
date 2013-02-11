@@ -189,8 +189,8 @@
 			SpawnRandom(Robot, 1);
 			SpawnRandom(Fireman, 1);
 			
-			SpawnRandom(Fire, 3);
-			SpawnRandom(Fire, 2);
+			SpawnRandom(Fire, 5);
+			SpawnRandom(Snake, 2);
 			SpawnRandom(SystemUnit, 5);
 		}
 		
@@ -208,7 +208,7 @@
 			_announceText.alpha = 0;
 			addChild(_announceText);
 			
-			_AltitudeText = new TextField(1024,64,"","Verdana",32,0xFFFFFF,true);
+			_AltitudeText = new TextField(200,64,"","Verdana",32,0xFFFFFF,true);
 			_AltitudeText.x = -512 + 144;
 			_AltitudeText.y = 32;
 			_AltitudeText.text = altitude.toString();

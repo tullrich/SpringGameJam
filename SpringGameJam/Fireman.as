@@ -39,6 +39,12 @@
 		
 		override public function AttackComplete():void
 		{	
+			if (!Victim is Fire)
+			{
+				super.AttackComplete();
+				return;
+			}
+		
 			for each(var a:Tile in Game.GetInstance()._level.GetAdjacentTiles(_tile, true))
 			{
 				if(!a.IsOpen() && a.bIsActive)
