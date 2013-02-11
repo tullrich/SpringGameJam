@@ -127,7 +127,7 @@
 		
 		public function Attack(u:Unit):void
 		{
-			var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas(AttackAnimation), 4);
+			var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas(AttackAnimation), 5);
 			anim.pivotX = anim.x = (anim.height) / 2;
 			anim.pivotY = anim.y = (anim.width) / 2;
 			Victim = u;

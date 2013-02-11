@@ -39,7 +39,7 @@
 		
 		override public function AttackComplete():void
 		{	
-			if (!Victim is Fire)
+			if (!(Victim is Fire))
 			{
 				super.AttackComplete();
 				return;

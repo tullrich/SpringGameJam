@@ -8,7 +8,6 @@
 			currentHealth = 1;
 			movementSpeed = 2;
 			IdleAnimation = "Fire";
-			AttackAnimation = null;
 		}
 		
 		public function TryToSpread()

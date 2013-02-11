@@ -10,6 +10,7 @@
 	import starling.utils.HAlign;
 	import starling.text.TextField;
 	import starling.filters.ColorMatrixFilter;
+	import starling.filters.FragmentFilter;
 	
 	public class Unit extends Sprite 
 	{
@@ -21,6 +22,7 @@
 		var maxHealth:int;
 		var _hp:TextField;
 		var AnimCallback:Function;
+		var defaultFilter:FragmentFilter;
 		
 		var IdleAnimation:String;
 		
@@ -35,13 +37,16 @@
 			scaleY = 0.75;
 			maxHealth = 5;
 			currentHealth = 5;
+			defaultFilter = null;
 		}
 		
 		public function init(e:Event):void
-		{		
+		{	
+			defaultFilter = CreateDefaultFilter();
+			
 			// character model 
 			_model = new MovieClip(Assets.getTexturesFromAtlas(IdleAnimation), 6);
-			
+			_model.filter = defaultFilter;
 			_model.pivotX = _model.x = (_model.height) / 2;
 			_model.pivotY = _model.y = (_model.width) / 2;
 			_model.rotation = Math.PI + Math.PI / 2;
@@ -62,12 +67,17 @@
 		{
 			AnimCallback = callBack;
 			
-			//Game.GetInstance().ToggleCinematic(true);
 			_model.visible = false;
 			_model.stop();
 			
 			_animClip = anim;
 			_animClip.loop = customStop;
+			
+			if (defaultFilter != null)
+			{
+				_animClip.filter = CreateDefaultFilter();
+			}
+			
 			if (customStop)
 			{
 				_animClip.addEventListener("AnimationReturn", AnimCompleted);
@@ -90,7 +100,6 @@
 			
 			_model.play();
 			_model.visible = true;
-			//Game.GetInstance().ToggleCinematic(false);
 			
 			if (AnimCallback != null)
 			{
@@ -205,9 +214,13 @@
 		
 		public function enable():void
 		{
-			_model.filter = null;
+			_model.filter = defaultFilter;
 		}
 		
+		protected function CreateDefaultFilter():FragmentFilter
+		{
+			return null
+		}
 
 	}
 	

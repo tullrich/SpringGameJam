@@ -203,13 +203,13 @@
 			_NextTurn.scaleX = _NextTurn.scaleY = 0.75;
 			addChild(_NextTurn);
 			
-			_announceText = new TextField(1024,800,"","Verdana",40,0x000000,true);
+			_announceText = new TextField(1024,800,"","Verdana",40,0xFFFFFF,true);
 			_announceText.visible = false;
 			_announceText.alpha = 0;
 			addChild(_announceText);
 			
-			_AltitudeText = new TextField(200,64,"","Verdana",32,0xFFFFFF,true);
-			_AltitudeText.x = -512 + 144;
+			_AltitudeText = new TextField(288,64,"","Verdana",28,0xFFFFFF,true);
+			_AltitudeText.x = 0;
 			_AltitudeText.y = 32;
 			_AltitudeText.text = altitude.toString();
 			addChild(_AltitudeText);

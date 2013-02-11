@@ -33,13 +33,19 @@
 		{
 			tempEnemies = units.slice();
 			
+			MaybeSpawnSnake();
+			
+			NextAction();
+		}
+		
+		// Spawns snake if there is no snakes, else 1/4 chance of spawning one
+		public function MaybeSpawnSnake():void
+		{
 			var chance:int = Math.floor(Math.random() * 4);
-			if(chance == 0)
+			if(chance == 0 || !OwnsClass(Snake))
 			{
 				Game.GetInstance().SpawnRandom(Snake, 1, true);
 			}
-			
-			NextAction();
 		}
 		
 		public function NextAction()
@@ -81,6 +87,12 @@
 				Game.GetInstance().SpawnRandom(Fire);
 			}
 			
+			// spawn boss snake every 10th turn
+			if(Game.GetInstance().turnNum % 10 == 0)
+			{
+				Game.GetInstance().SpawnRandom(BossSnake);
+			}
+			
 			Game.GetInstance().EndEnemyTurn();
 		}
 		
@@ -112,6 +124,19 @@
 		private function DelayedClick(t:Tile)
 		{
 			Game.GetInstance()._level._targeter.HandleClick(t);
+		}
+		
+		public function OwnsClass(c:Class):Boolean
+		{
+			for each(var u:Actor in units)
+			{
+				if (u is c)
+				{
+					return true;
+				}
+			}
+			
+			return false;
 		}
 
 	}

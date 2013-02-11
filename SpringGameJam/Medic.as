@@ -7,7 +7,7 @@
 		public function Medic() {
 			
 			movementSpeed = 5;
-			healpower = 2;
+			healpower = 1;
 			bPlayerControlled = true;
 			IdleAnimation = "MedicIdle";
 			AttackAnimation = "MedicAttack";
