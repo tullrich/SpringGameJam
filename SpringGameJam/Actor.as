@@ -165,12 +165,18 @@
 		
 		override public function TakeDamage(d:int)
 		{
-			currentHealth -= d;
-			if(currentHealth > 0)
+			if (currentHealth - d <= 0)
 			{
-				_hp.text = "" + currentHealth;
+				currentHealth = 0;
 			}
 			else
+			{
+				currentHealth -= d;
+			}
+			
+			_hp.text = "" + currentHealth;
+
+			if (currentHealth <= 0)
 			{
 				Game.GetInstance().RemoveUnit(this);
 			}

@@ -165,14 +165,17 @@
 		
 		public function TakeDamage(d:int)
 		{
-			currentHealth -= d;
-			if(currentHealth >= 0)
+			if(currentHealth > 0)
 			{
+				if (currentHealth - d < 0)
+				{
+					currentHealth = 0;
+				}
+				else
+				{
+					currentHealth -= d;
+				}
 				_hp.text = "" + currentHealth;
-			}
-			else
-			{
-				
 			}
 		}
 		
@@ -180,7 +183,14 @@
 		{
 			if (currentHealth < 5)
 			{
-				currentHealth++;
+				if( currentHealth + h > 5)
+				{
+					currentHealth = 5;
+				}
+				else
+				{
+					currentHealth += h;
+				}
 				_hp.text = "" + currentHealth;
 			}
 		}

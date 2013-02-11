@@ -49,6 +49,30 @@
 		{
 			bIsSpecial = b;
 		}
+		
+		override public function TakeDamage(d:int)
+		{
+			super.TakeDamage(d);
+			
+			if (currentHealth == 0 && _animClip == null)
+			{
+				// we are not in the 0 health animation
+				var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas("ConsoleBroken"), 4);
+				anim.pivotX = anim.x = (anim.height) / 2;
+				anim.pivotY = anim.y = (anim.width) / 2;
+				PlayAnimation(anim, null, true);
+			}
+		}
+		
+		override public function GainHealth(h:int)
+		{
+			super.GainHealth(h);
+			
+			if(currentHealth > 0 && _animClip != null)
+			{
+				_animClip.dispatchEventWith("AnimationReturn");
+			}
+		}
 
 	}
 	
