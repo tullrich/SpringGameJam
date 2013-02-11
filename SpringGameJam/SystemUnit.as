@@ -15,6 +15,8 @@
 		public function SystemUnit() 
 		{
 			super();
+			currentHealth = 1;
+			maxHealth = 1;
 			IdleAnimation = "NormalConsole";
 		}
 		
