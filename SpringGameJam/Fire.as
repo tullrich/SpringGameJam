@@ -8,7 +8,7 @@
 			currentHealth = 1;
 			movementSpeed = 2;
 			IdleAnimation = "Fire";
-			AttackAnimation = "Fire";
+			AttackAnimation = null;
 		}
 		
 		public function TryToSpread()
@@ -16,21 +16,18 @@
 			
 			var chance:int;
 			
+			// damage surroundings
 			for each(var a:Tile in Game.GetInstance()._level.GetAdjacentTiles(_tile))
 			{
 				if(!a.IsOpen() && a.bIsActive && !(a.resident is Fire))
 				{
 					if(a.resident is Fireman)
 						continue;
-					Attack(a.resident);
-						
-					if(a.resident.currentHealth <= 0)
-					{
-						Game.GetInstance().RemoveUnit(Actor(a.resident));
-					}
+					a.resident.TakeDamage(power);
 				}
 			}
 			
+			// spawn more fire
 			for each(var t:Tile in Game.GetInstance()._level.GetFreeAdjacent(_tile))
 			{
 				chance = Math.floor(Math.random() * 2);

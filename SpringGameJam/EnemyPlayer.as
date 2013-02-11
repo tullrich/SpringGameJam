@@ -92,11 +92,13 @@
 			var index:int;
 			if (_targeter.interactable.length > 0)
 			{
+				trace("_targeter.interactable.length " + _targeter.interactable.length);
 				index = Math.floor(Math.random() * _targeter.interactable.length);
 				Starling.juggler.delayCall(DelayedClick, 1, _targeter.interactable[index]);
 			}
 			else if (_targeter.reachable.length > 0)
 			{
+				trace("_targeter.reachable.length " + _targeter.reachable.length);
 				index = Math.floor(Math.random() * _targeter.reachable.length);
 				Starling.juggler.delayCall(DelayedClick, 1, _targeter.reachable[index]);
 			}

@@ -157,8 +157,12 @@
 			
 			for each (var u:Object in Level1.Units)
 			{
-				CreateUnitAt(u["class"], u["x"], u["y"]);
+				//CreateUnitAt(u["class"], u["x"], u["y"]);
+				SpawnRandom(u["class"]);
 			}
+			
+			SpawnRandom(Fire, 5);
+			SpawnRandom(SystemUnit, 5);
 		}
 		
 		private function CreateUI():void
@@ -349,7 +353,31 @@
 				while(!goodLocation)
 				
 				var u:Unit = CreateUnitAt(c,randX,randY);
-				Actor(u).EndTurn();
+				if(spawnDisabled)
+				{
+					Actor(u).EndTurn();
+				}
+			}
+		}
+		
+		public function CheckSystems()
+		{
+			var bIsSafe:Boolean = true;
+
+			for each (var unit:SystemUnit in systemUnits)
+			{
+				if(unit.currentHealth <= 0)
+				{							
+					_AltitudeImage.visible = false;
+					_AltitudeCriticalImage.visible = true;
+					bIsSafe = false;
+					break;
+				}
+			}
+			if(bIsSafe)
+			{
+				_AltitudeImage.visible = true;
+				_AltitudeCriticalImage.visible = false;
 			}
 		}
 		

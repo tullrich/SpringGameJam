@@ -137,32 +137,9 @@
 		
 		public function AttackComplete():void
 		{	
-			var bIsSafe:Boolean;
-			var tempSystems:Vector.<SystemUnit> = Game.GetInstance().systemUnits;
-			var TheGame = Game.GetInstance();
-			
 			if( Victim != null)
 			{
 				Victim.TakeDamage(power);
-				if(Victim is SystemUnit)
-				{
-					bIsSafe = true;
-					for each (var unit:SystemUnit in tempSystems)
-					{
-						if(unit.currentHealth <= 0)
-						{							
-							TheGame._AltitudeImage.alpha = 0;
-							TheGame._AltitudeCriticalImage.alpha = 100;
-							bIsSafe = false;
-							break;
-						}
-					}
-					if(bIsSafe)
-					{
-							TheGame._AltitudeImage.alpha = 100;
-							TheGame._AltitudeCriticalImage.alpha = 0;
-					}
-				}
 				Victim =  null;
 				EndTurn();
 			}
