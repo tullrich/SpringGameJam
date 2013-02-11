@@ -61,17 +61,11 @@
 		];*/
 		
 		static var Units:Array = [
-								  {"class":Fire, "x":10, "y":15 }, 
 								  {"class":Robot, "x":7, "y":7 }, 
 								  {"class":Fireman, "x":10, "y":14 },
 								  {"class":Medic, "x":15, "y":7 },
 								  {"class":Mechanic, "x":12, "y":8 },
-								  {"class":Snake, "x":7, "y":8 },
-								  {"class":Snake, "x":7, "y":6 },
-								  {"class":Snake, "x":10, "y":5 },
-								  {"class":Snake, "x":10, "y":4 },
 								  {"class":MaceWindu, "x":10, "y":8 },
-								  {"class":SystemUnit, "x":9, "y":4 }
 								  ];
 	}
 	

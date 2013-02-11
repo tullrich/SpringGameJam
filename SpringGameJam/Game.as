@@ -128,13 +128,12 @@
 			_AltitudeCriticalImage = new Image(Assets.getTexture("ElevationBarCritical"));
 			_AltitudeCriticalImage.x = 0;
 			_AltitudeCriticalImage.y = 0;
-			_AltitudeCriticalImage.alpha = 0;
+			_AltitudeCriticalImage.visible = false;
 			addChild(_AltitudeCriticalImage);
 			
 			_AltitudeImage = new Image(Assets.getTexture("ElevationBar"));
 			_AltitudeImage.x = 0;
 			_AltitudeImage.y = 0;
-			_AltitudeImage.alpha = 100;
 			addChild(_AltitudeImage);
 		}
 		
@@ -157,8 +156,12 @@
 			
 			for each (var u:Object in Level1.Units)
 			{
-				CreateUnitAt(u["class"], u["x"], u["y"]);
+				//CreateUnitAt(u["class"], u["x"], u["y"]);
+				SpawnRandom(u["class"]);
 			}
+			
+			SpawnRandom(Fire, 5);
+			SpawnRandom(SystemUnit, 5);
 		}
 		
 		private function CreateUI():void
@@ -322,6 +325,60 @@
 			
 		}
 		
+		public function SpawnRandom(c:Class, count:int = 1, spawnDisabled:Boolean = false)
+		{
+			for (var i:int = 0; i < count; i++)
+			{
+				var failsafe = 0;
+				var goodLocation:Boolean = false;
+				do
+				{
+					var randX:int = Math.floor(Math.random() * 21);
+					var randY:int = Math.floor(Math.random() * 16);
+					if(_level.Map[randX][randY].IsOpen())
+					{
+						goodLocation = true;
+					}
+					else
+					{
+						failsafe++
+						if (failsafe > 20)
+						{
+							trace("failed to spawn " + c);
+							return;
+						}
+					}
+				}
+				while(!goodLocation)
+				
+				var u:Unit = CreateUnitAt(c,randX,randY);
+				if(spawnDisabled)
+				{
+					Actor(u).EndTurn();
+				}
+			}
+		}
+		
+		public function CheckSystems()
+		{
+			var bIsSafe:Boolean = true;
+
+			for each (var unit:SystemUnit in systemUnits)
+			{
+				if(unit.currentHealth <= 0)
+				{							
+					_AltitudeImage.visible = false;
+					_AltitudeCriticalImage.visible = true;
+					bIsSafe = false;
+					break;
+				}
+			}
+			if(bIsSafe)
+			{
+				_AltitudeImage.visible = true;
+				_AltitudeCriticalImage.visible = false;
+			}
+		}
 		
 	}
 	

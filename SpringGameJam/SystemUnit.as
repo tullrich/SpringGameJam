@@ -63,6 +63,8 @@
 				anim.pivotY = anim.y = (anim.width) / 2;
 				PlayAnimation(anim, null, true);
 			}
+			
+			Game.GetInstance().CheckSystems();
 		}
 		
 		override public function GainHealth(h:int)
@@ -74,6 +76,8 @@
 				_hp.visible = true;
 				_animClip.dispatchEventWith("AnimationReturn");
 			}
+			
+			Game.GetInstance().CheckSystems();
 		}
 
 	}
