@@ -161,7 +161,7 @@
 			
 			systemUnits = new Vector.<SystemUnit>
 			
-			for(var x:int = 0; x < 5; x++)
+			/*for(var x:int = 0; x < 5; x++)
 			{
 				var spawnType:int = Math.floor(Math.random() * 5);
 				if(spawnType == 0)
@@ -184,9 +184,15 @@
 				{
 					SpawnRandom(Robot,1,false);
 				}
-			}
+			}*/
+			SpawnRandom(Mechanic, 1);
+			SpawnRandom(Medic, 1);
+			SpawnRandom(MaceWindu, 1);
+			SpawnRandom(Robot, 1);
+			SpawnRandom(Fireman, 1);
 			
-			SpawnRandom(Fire, 5);
+			SpawnRandom(Fire, 3);
+			SpawnRandom(Fire, 2);
 			SpawnRandom(SystemUnit, 5);
 		}
 		
