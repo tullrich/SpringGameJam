@@ -20,6 +20,8 @@
 		static var _instance:Game;
 		var _level:Grid;
 		var _interceptor:Sprite;
+		var _AltitudeImage:Image;
+		var _AltitudeCriticalImage:Image;
 		var bIntercepting;
 		var systemUnits:Vector.<SystemUnit>
 		var enemy:EnemyPlayer;
@@ -122,6 +124,18 @@
 			
 			_mc = new Image(Assets.getTexture("BgAirplane"));
 			addChild(_mc);
+			
+			_AltitudeCriticalImage = new Image(Assets.getTexture("ElevationBarCritical"));
+			_AltitudeCriticalImage.x = 0;
+			_AltitudeCriticalImage.y = 0;
+			_AltitudeCriticalImage.alpha = 0;
+			addChild(_AltitudeCriticalImage);
+			
+			_AltitudeImage = new Image(Assets.getTexture("ElevationBar"));
+			_AltitudeImage.x = 0;
+			_AltitudeImage.y = 0;
+			_AltitudeImage.alpha = 100;
+			addChild(_AltitudeImage);
 		}
 		
 		private function CreateGameField():void
@@ -149,10 +163,11 @@
 		
 		private function CreateUI():void
 		{
-			var _NextTurn:Button = new Button(Assets.getTexture("NextTurnButtonUp"), "Next Turn" , Assets.getTexture("NextTurnButtonDown"));
+			var _NextTurn:Button = new Button(Assets.getTexture("NextTurnButtonUp"), "" , Assets.getTexture("NextTurnButtonDown"));
 			_NextTurn.addEventListener(Event.TRIGGERED, EndPlayerTurn);
-			_NextTurn.x = 1024 - _NextTurn.height;
-			_NextTurn.y = 800 - _NextTurn.height;
+			_NextTurn.x = 1024 - 180;
+			_NextTurn.y = 800 - 85.5;
+			_NextTurn.scaleX = _NextTurn.scaleY = 0.75;
 			addChild(_NextTurn);
 			
 			_announceText = new TextField(1024,800,"","Verdana",40,0x000000,true);
@@ -161,8 +176,8 @@
 			addChild(_announceText);
 			
 			_AltitudeText = new TextField(1024,64,"","Verdana",32,0xFFFFFF,true);
-			_AltitudeText.x = -256;
-			_AltitudeText.y = 0
+			_AltitudeText.x = -512 + 144;
+			_AltitudeText.y = 32;
 			_AltitudeText.text = altitude.toString();
 			addChild(_AltitudeText);
 			
@@ -290,7 +305,7 @@
 			{
 				if(u.bIsSpecial == true && u.currentHealth > 0 && altitude < 33000)
 					altitude += 1000;
-				if(u.currentHealth == 0)
+				if(u.currentHealth <= 0)
 					altitude -= 1000;
 			}
 			

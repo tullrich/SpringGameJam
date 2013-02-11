@@ -20,7 +20,10 @@
 			{
 				if(!a.IsOpen() && a.bIsActive && !(a.resident is Fire))
 				{
+					if(a.resident is Fireman)
+						continue;
 					Attack(a.resident);
+						
 					if(a.resident.currentHealth <= 0)
 					{
 						Game.GetInstance().RemoveUnit(Actor(a.resident));

@@ -55,10 +55,16 @@
 		[Embed(source="/assets/overlay_move.png")]
 		private static const OverlayMove:Class;
 		
-		[Embed(source="/assets/overlay_move.png")]
+		[Embed(source="/assets/ElevationBar.png")]
+		private static const ElevationBar:Class;
+		
+		[Embed(source="/assets/ElevationBarCritical.png")]
+		private static const ElevationBarCritical:Class;
+		
+		[Embed(source="/assets/EndTurnNormalButton.png")]
 		private static const NextTurnButtonUp:Class;
 		
-		[Embed(source="/assets/overlay_interact.png")]
+		[Embed(source="/assets/EndTurnNoMovesLeftButton.png")]
 		private static const NextTurnButtonDown:Class;
 		
 		[Embed(source="/assets/overlay_interact.png")]
