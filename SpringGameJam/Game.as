@@ -18,7 +18,7 @@
 		static var _instance:Game;
 		var _level:Grid;
 		var _interceptor:Sprite;
-		var _AltitudeImage:Image;
+		var _AltitudeImage:Image, _NextButton:Image;
 		var _AltitudeCriticalImage:Image;
 		var bIntercepting;
 		var systemUnits:Vector.<SystemUnit>
@@ -133,6 +133,13 @@
 			_AltitudeImage.x = 0;
 			_AltitudeImage.y = 0;
 			addChild(_AltitudeImage);
+			
+			_NextButton = new Image(Assets.getTexture("NextTurnButtonDown"));
+			_NextButton.x = 1024 - 180;
+			_NextButton.y = 800 - 85.5;
+			_NextButton.scaleX = _NextButton.scaleY = 0.75;
+			_NextButton.alpha = 0;
+			addChild(_NextButton);
 		}
 		
 		private function CreateGameField():void
@@ -152,13 +159,38 @@
 			
 			systemUnits = new Vector.<SystemUnit>
 			
-			for each (var u:Object in Level1.Units)
+			/*for(var x:int = 0; x < 5; x++)
 			{
-				//CreateUnitAt(u["class"], u["x"], u["y"]);
-				SpawnRandom(u["class"]);
-			}
+				var spawnType:int = Math.floor(Math.random() * 5);
+				if(spawnType == 0)
+				{
+					SpawnRandom(Fireman,1,false);
+				}
+				else if(spawnType == 1)
+				{
+					SpawnRandom(Medic,1,false);
+				}
+				else if(spawnType == 2)
+				{
+					SpawnRandom(MaceWindu,1,false);
+				}
+				else if(spawnType == 3)
+				{
+					SpawnRandom(Mechanic,1,false);
+				}
+				else
+				{
+					SpawnRandom(Robot,1,false);
+				}
+			}*/
+			SpawnRandom(Mechanic, 1);
+			SpawnRandom(Medic, 1);
+			SpawnRandom(MaceWindu, 1);
+			SpawnRandom(Robot, 1);
+			SpawnRandom(Fireman, 1);
 			
-			SpawnRandom(Fire, 5);
+			SpawnRandom(Fire, 3);
+			SpawnRandom(Fire, 2);
 			SpawnRandom(SystemUnit, 5);
 		}
 		
@@ -376,6 +408,24 @@
 				_AltitudeImage.visible = true;
 				_AltitudeCriticalImage.visible = false;
 			}
+		}
+		
+		public function CheckPlayerDone():Boolean
+		{
+			for each(var playersUnit:Actor in playersUnits)
+			{
+				if(playersUnit.HasAction())
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		public function FlashButton()
+		{
+			trace("Out of Moves");
+			_NextButton.alpha = 100;
 		}
 		
 	}
