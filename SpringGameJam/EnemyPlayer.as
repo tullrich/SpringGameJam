@@ -59,7 +59,7 @@
 			if (tempEnemies.length > 0)
 			{
 				var u:Actor = tempEnemies.pop();
-				if(u is Fire && !u.bHasAttacked)
+				if(u is Fire)
 				{
 					Fire(u).TryToSpread();
 					NextAction();
@@ -115,7 +115,7 @@
 				index = Math.floor(Math.random() * _targeter.interactable.length);
 				Starling.juggler.delayCall(DelayedClick, 1, _targeter.interactable[index]);
 			}
-			if (_targeter.reachable.length > 0)
+			else if (_targeter.reachable.length > 0)
 			{
 				index = Math.floor(Math.random() * _targeter.reachable.length);
 				Starling.juggler.delayCall(DelayedClick, 1, _targeter.reachable[index]);

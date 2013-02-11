@@ -15,6 +15,8 @@
 		var bPlayerControlled:Boolean;
 		var awaitingInteract:Tile;
 		var Victim:Unit;
+		var power:int;
+		var healpower:int;
 		
 		var AttackAnimation:String;
 		var WalkAnimation:String;
@@ -24,6 +26,8 @@
 		{
 			super();
 			awaitingInteract = null;
+			power = 1;
+			healpower = 0;
 			movementSpeed = 3;
 		}
 		
@@ -133,7 +137,7 @@
 		{	
 			if( Victim != null)
 			{
-				Victim.TakeDamage(1);
+				Victim.TakeDamage(power);
 				Victim =  null;
 				EndTurn();
 			}
@@ -180,6 +184,28 @@
 			{
 				Game.GetInstance().RemoveUnit(this);
 			}
+		}
+		
+		public function Heal(u:Unit):void
+		{
+			var anim:MovieClip = new MovieClip(Assets.getTexturesFromAtlas(AttackAnimation), 4);
+			anim.pivotX = anim.x = (anim.height) / 2;
+			anim.pivotY = anim.y = (anim.width) / 2;
+			Victim = u;
+			PlayAnimation(anim, HealComplete);
+			LookTowards(u._tile);
+		}
+		
+		public function HealComplete():void
+		{	
+			if( Victim != null)
+			{
+				Victim.GainHealth(healpower);
+				Victim =  null;
+				EndTurn();
+			}
+			
+			Game.GetInstance().ToggleCinematic(false);
 		}
 
 	}
