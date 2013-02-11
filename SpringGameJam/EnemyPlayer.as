@@ -31,7 +31,25 @@
 		
 		public function BeginTurn()
 		{
+			var goodLocation:Boolean = false;
 			tempEnemies = units.slice();
+			
+			var chance:int = Math.floor(Math.random() * 4);
+			if(chance == 0)
+			{
+				do
+				{
+					var randX:int = Math.floor(Math.random() * 21);
+					var randY:int = Math.floor(Math.random() * 16);
+					if(Game.GetInstance()._level.Map[randX][randY].IsOpen())
+					{
+						goodLocation = true;
+					}
+				}
+				while(!goodLocation)
+				
+				Game.GetInstance().CreateUnitAt(Snake,randX,randY);
+			}
 			
 			NextAction();
 		}
@@ -65,6 +83,24 @@
 		
 		private function CompleteTurn()
 		{
+			var goodLocation:Boolean = false;
+			var chance:int = Math.floor(Math.random() * 4);
+			
+			if(chance == 0)
+			{
+				do
+				{
+					var randX:int = Math.floor(Math.random() * 21);
+					var randY:int = Math.floor(Math.random() * 16);
+					if(Game.GetInstance()._level.Map[randX][randY].IsOpen())
+					{
+						goodLocation = true;
+					}
+				}
+				while(!goodLocation)
+				
+				Game.GetInstance().CreateUnitAt(Fire,randX,randY);
+			}
 			Game.GetInstance().EndEnemyTurn();
 		}
 		
