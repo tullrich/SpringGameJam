@@ -83,6 +83,17 @@
 			{
 				enemy.units.splice(enemyIndex,1);
 			}
+			//todo: clean this
+			if (enemy.tempEnemies != null)
+			{
+				var tempIndex:int = enemy.tempEnemies.indexOf(unit);
+				if (tempIndex != -1)
+				{
+					enemy.tempEnemies.splice(tempIndex,1);
+				}
+			}
+			
+			
 			_level.RemoveUnit(unit);
 		}
 		

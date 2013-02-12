@@ -55,13 +55,11 @@
 				var u:Actor = tempEnemies.pop();
 				if(u is Fire)
 				{
-					trace("spreading fire" + u._tile.xindex + " x " + u._tile.yindex);
 					Fire(u).TryToSpread();
 					NextAction();
 				}
 				else if( u is Actor)
 				{
-					trace("Using actor at " + u._tile.xindex + " x " + u._tile.yindex);
 					Use(Actor(u));
 				}
 			}
