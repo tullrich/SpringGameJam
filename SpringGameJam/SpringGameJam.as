@@ -16,7 +16,7 @@
 		public function SpringGameJam() {
 			
 			stage.align = StageAlign.TOP_LEFT;
-			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.scaleMode = StageScaleMode.EXACT_FIT;
 			//Starling.handleLostContext = true;
 			
 			myStarling = new Starling(Intro, stage);
